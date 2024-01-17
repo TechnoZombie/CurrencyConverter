@@ -1,4 +1,4 @@
-# CurrencyCoverter
+# CurrencyConverter
 Simple currency converter powered by Exchange Rate API 
 
 The converter is presented in an HTML file with input for the amount to be converted and output fields for exchange rate and conversion result.
