@@ -26,7 +26,7 @@ $(document).ready(function () {
     $("#inputCurrency").change(function () {
         // Get the selected value from the dropdown
         inputSelectedCurrency = $(this).val();
-        API_URL = URL+inputSelectedCurrency;
+        API_URL = URL + inputSelectedCurrency;
     });
 
 });
@@ -72,3 +72,4 @@ function fetchData(cb) {
         }
     });
 }
+

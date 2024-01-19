@@ -12,14 +12,11 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Your custom JavaScript file -->
+
     <script src="currencyConverter.js"></script>
+    <script src="currencyOptions.js"></script>
     <link rel="stylesheet" type="text/css" href="currencyConverterCSS.css">
-
-
 </head>
-
-<body>
 
 <form>
     <label for="amount">Convert</label>
@@ -27,40 +24,27 @@
         <input type="text" id="amount" class="form-control" placeholder="Enter amount"
                aria-label="Amount to Convert" aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <select class="custom-select" id="inputCurrency">
-                <option value="">Select</option>
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-                <option value="AUD">AUD</option>
-                <option value="CAD">CAD</option>
+            <select class="custom-select dynamic-select" id="inputCurrency">
+                <!-- Options are being dynamically loaded from currencyOptions.js  -->
             </select>
         </div>
     </div>
     <br>
-
-
 
     <label for="result">Result</label>
     <div class="input-group">
         <input type="text" id="result" class="form-control" readonly>
         <div class="input-group-append">
-            <select class="custom-select" id="outputCurrency">
-                <option value="">Select</option>
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="GBP">GBP</option>
-                <option value="AUD">AUD</option>
-                <option value="CAD">CAD</option>
+            <select class="custom-select dynamic-select" id="outputCurrency">
+                <!-- Options are being dynamically loaded from currencyOptions.js  -->
             </select>
         </div>
     </div>
     <br>
 
-
     <label for="rate"><small><b>Conversion Rate</b></small></label>
     <div class="input-group">
-        <input type="text" id="rate" class="form-control" readonly> <!--placeholder="Conversion rate"-->
+        <input type="text" id="rate" class="form-control" readonly>
         <div class="input-group-append">
             <span class="input-group-text" id="rateCurrency"></span>
         </div>
@@ -71,7 +55,7 @@
     <br>
     <br>
     <button type="reset" id="buttonReset">Reset</button>
-    <small>CurrencyConverter v.1.0</small>
+    <small>CurrencyConverter v1.1</small>
     <br>
     <small>Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a></small>
 
