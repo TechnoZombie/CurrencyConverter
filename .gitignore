@@ -1,4 +1,2 @@
-
-.idea/CurrencyConverter.iml
-.idea/modules.xml
-.idea/vcs.xml
+out/
+.idea/
