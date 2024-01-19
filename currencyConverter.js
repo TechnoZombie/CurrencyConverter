@@ -22,11 +22,11 @@ $(document).ready(function () {
         $("#rateCurrency").text(outputSelectedCurrency);
     });
 
+    // Add an event listener to the inputCurrency dropdown
     $("#inputCurrency").change(function () {
         // Get the selected value from the dropdown
         inputSelectedCurrency = $(this).val();
         API_URL = URL+inputSelectedCurrency;
-        console.log("URL " + API_URL);
     });
 
 });
@@ -49,7 +49,6 @@ function calculate(result) {
     if (result && result.rates && rate !== undefined) {
         let amountToConvert = $('#amount').val();
         let convertedCurrency = amountToConvert * rate;
-        console.log(convertedCurrency);
         $('#result').val(convertedCurrency);
         $('#rate').val(rate);
     } else {
@@ -58,7 +57,7 @@ function calculate(result) {
     }
 }
 
-// Refactored fetchData function for handling API requests with error callback
+//fetchData function for handling API requests with error callback
 function fetchData(cb) {
     $.ajax({
         url: API_URL,
