@@ -15,6 +15,7 @@ form {
 
 label {
     font-weight: bold;
+
 }
 
 #buttonConvert {
@@ -22,19 +23,21 @@ label {
     padding: 10px;
     background-color: #007bff;
     color: #fff;
-    border: none;
-    border-radius: 3px;
+    border: 2px solid #0056b3;
+    border-radius: 20px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 #buttonReset {
     width: 100%;
     padding: 10px;
-    background-color: #b87b00;
+    background-color: darkorange;
     color: #fff;
-    border: none;
-    border-radius: 3px;
+    border: 2px solid #c58100;
+    border-radius: 20px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 #buttonConvert:hover {
@@ -42,5 +45,13 @@ label {
 }
 
 #buttonReset:hover {
-    background-color: #966400;
+    background-color: #c58100;
+}
+
+.footer {
+    width: 100%;
+    padding: 10px;
+    font-weight: bolder;
+    color: black;
+    font-size: 12px;
 }
