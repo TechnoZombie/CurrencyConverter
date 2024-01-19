@@ -9,6 +9,7 @@ It uses an AJAX jquery $.ajax function to make an asynchronous HTTP request and 
 
 The styling is made using CSS Bootstrap in an external script.
 
-Future version will include selectable currency.
+Features selectable currency on the Convert and Result sides.
+Conversion Rate will also show the Result currency once it has been selected.
 
 LINK: https://technozombie.github.io/CurrencyConverter/currencyConverter.html
