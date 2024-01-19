@@ -1,26 +1,35 @@
-var API_URL2 = 'https://open.er-api.com/v6/latest/EUR';
+let URL = 'https://open.er-api.com/v6/latest/';
+let inputSelectedCurrency;
+let outputSelectedCurrency;
+let API_URL;
 
 $(document).ready(function () {
     const convertButton = $('#buttonConvert');
     const resetButton = $('#buttonReset')
 
     convertButton.click(function () {
-        convertButtonFeedback();
         convertAmount(calculate);
     });
 
     resetButton.click(function () {
-        resetButtonFeedback();
+        $("#rateCurrency").text("");
     })
+
+    // Add an event listener to the outputCurrency dropdown
+    $("#outputCurrency").change(function () {
+        // Get the selected value from the dropdown
+        outputSelectedCurrency = $(this).val();
+        $("#rateCurrency").text(outputSelectedCurrency);
+    });
+
+    $("#inputCurrency").change(function () {
+        // Get the selected value from the dropdown
+        inputSelectedCurrency = $(this).val();
+        API_URL = URL+inputSelectedCurrency;
+        console.log("URL " + API_URL);
+    });
+
 });
-
-function convertButtonFeedback() {
-    console.log('Convert button was clicked.');
-}
-
-function resetButtonFeedback() {
-    console.log('Reset button was clicked.');
-}
 
 function convertAmount(callBackFunction) {
     fetchData(function (error, result) {
@@ -35,17 +44,15 @@ function convertAmount(callBackFunction) {
 }
 
 function calculate(result) {
-    if (result && result.rates && result.rates.USD) {
-        var amountToConvert = $('#amount').val();
-        var rate = result.rates.USD;
-        var convertedCurrency = (amountToConvert * rate);
+    let rate = result.rates && result.rates[outputSelectedCurrency];
 
+    if (result && result.rates && rate !== undefined) {
+        let amountToConvert = $('#amount').val();
+        let convertedCurrency = amountToConvert * rate;
+        console.log(convertedCurrency);
         $('#result').val(convertedCurrency);
-        // container.html('<p>1 EUR = ' + usd + ' USD</p>');
         $('#rate').val(rate);
-
     } else {
-
         console.error('Invalid data structure in API response.');
         $('#rate').val('ERROR!');
     }
@@ -54,7 +61,7 @@ function calculate(result) {
 // Refactored fetchData function for handling API requests with error callback
 function fetchData(cb) {
     $.ajax({
-        url: API_URL2,
+        url: API_URL,
         type: 'GET',
         dataType: 'json',
         async: true,

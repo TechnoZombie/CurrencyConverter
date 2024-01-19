@@ -21,40 +21,59 @@
 
 <body>
 
-    <form>
-        <label for="amount">Convert</label>
-        <div class="input-group">
-            <input type="text" id="amount" class="form-control" placeholder="Enter amount"
-                aria-label="Amount to Convert" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <span class="input-group-text">EUR</span>
-            </div>
+<form>
+    <label for="amount">Convert</label>
+    <div class="input-group">
+        <input type="text" id="amount" class="form-control" placeholder="Enter amount"
+               aria-label="Amount to Convert" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <select class="custom-select" id="inputCurrency">
+                <option value="">Select</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+            </select>
         </div>
-        <br>
+    </div>
+    <br>
 
-        <label for="rate">Rate</label>
-        <div class="input-group">
-            <input type="text" id="rate" class="form-control" readonly>
-            <div class="input-group-append">
-                <span class="input-group-text">USD</span>
-            </div>
+
+
+    <label for="result">Result</label>
+    <div class="input-group">
+        <input type="text" id="result" class="form-control" readonly>
+        <div class="input-group-append">
+            <select class="custom-select" id="outputCurrency">
+                <option value="">Select</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="GBP">GBP</option>
+                <option value="AUD">AUD</option>
+                <option value="CAD">CAD</option>
+            </select>
         </div>
-        <br>
+    </div>
+    <br>
 
-        <label for="result">Result</label>
-        <div class="input-group">
-            <input type="text" id="result" class="form-control" readonly>
-            <div class="input-group-append">
-                <span class="input-group-text">USD</span>
-            </div>
+
+    <label for="rate"><small><b>Conversion Rate</b></small></label>
+    <div class="input-group">
+        <input type="text" id="rate" class="form-control" readonly> <!--placeholder="Conversion rate"-->
+        <div class="input-group-append">
+            <span class="input-group-text" id="rateCurrency"></span>
         </div>
-        <br>
+    </div>
+    <br>
 
-        <button type="button" id="buttonConvert">Convert</button>
-        <br>
-        <br>
-        <button type="reset" id="buttonReset">Reset</button>
-    </form>
+    <button type="button" id="buttonConvert">Convert</button>
+    <br>
+    <br>
+    <button type="reset" id="buttonReset">Reset</button>
+    <small>Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a></small>
+
+</form>
 
 </body>
 
