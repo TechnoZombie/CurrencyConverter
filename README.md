@@ -12,4 +12,4 @@ The styling is made using CSS Bootstrap in an external script.
 Features selectable currency on the Convert and Result sides.
 Conversion Rate will also show the Result currency once it has been selected.
 
-LINK: https://technozombie.github.io/CurrencyConverter/currencyConverter.html
+LINK: https://technozombie.github.io/CurrencyConverter
