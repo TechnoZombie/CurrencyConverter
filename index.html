@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="currencyConverter.js"></script>
+    <script src="currencyOptions.js"></script>
+    <link rel="stylesheet" type="text/css" href="currencyConverterCSS.css">
+</head>
+
+<form>
+    <label for="amount">Convert</label>
+    <div class="input-group">
+        <input type="text" id="amount" class="form-control" placeholder="Enter amount"
+               aria-label="Amount to Convert" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <select class="custom-select dynamic-select" id="inputCurrency">
+                <!-- Options are being dynamically loaded from currencyOptions.js  -->
+            </select>
+        </div>
+    </div>
+    <br>
+
+    <label for="result">Result</label>
+    <div class="input-group">
+        <input type="text" id="result" class="form-control" readonly>
+        <div class="input-group-append">
+            <select class="custom-select dynamic-select" id="outputCurrency">
+                <!-- Options are being dynamically loaded from currencyOptions.js  -->
+            </select>
+        </div>
+    </div>
+    <br>
+
+    <label for="rate"><small><b>Conversion Rate</b></small></label>
+    <div class="input-group">
+        <input type="text" id="rate" class="form-control" readonly>
+        <div class="input-group-append">
+            <span class="input-group-text" id="rateCurrency"></span>
+        </div>
+    </div>
+    <br>
+
+    <button type="button" id="buttonConvert">Convert</button>
+    <br>
+    <br>
+    <button type="reset" id="buttonReset">Reset</button>
+    <br>
+    <div class="footer">
+        CurrencyConverter v1.1
+        <br>
+       Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a>
+    </div>
+
+</form>
+
+</body>
+
+</html>
