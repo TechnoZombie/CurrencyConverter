@@ -56,9 +56,20 @@ label {
 
 .footer {
     width: 100%;
-    padding: 10px;
+    padding: 10px 0;
     font-weight: bolder;
     color: black;
     font-size: 11px;
+    text-align: center;
+}
+
+.github-link {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.github-logo {
+    height: 1em; /* Keep the aspect ratio of the logo */
+    vertical-align: middle;
 }
 
