@@ -64,11 +64,11 @@ label {
 
 .github-link {
     display: inline-block;
-    margin-left: 10px;
+    margin-left: 0px;
 }
 
 .github-logo {
-    height: 3em; 
+    height: 2em; 
     vertical-align: middle;
 }
 
