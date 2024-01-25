@@ -67,6 +67,10 @@ label {
     vertical-align: middle;
 }
 
+/*.github-link a:hover {
+    text-decoration: none;
+}*/
+
 .github-logo {
     height: 2em;
     vertical-align: middle;
@@ -79,5 +83,9 @@ label {
 
 a {
     color: black;
+}
+
+a:hover {
+    text-decoration: none;
 }
 
