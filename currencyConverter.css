@@ -64,10 +64,20 @@ label {
 
 .github-link {
     display: inline-block;
+    vertical-align: middle;
 }
 
 .github-logo {
-    height: 2em; 
+    height: 2em;
     vertical-align: middle;
+}
+
+.text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+a {
+    color: black;
 }
 
