@@ -17,7 +17,6 @@ form {
     border: 2px solid #dee2e6;
     border-radius: 5px;
     padding: 0px;
-
 }
 
 label {
@@ -66,10 +65,6 @@ label {
     display: inline-block;
     vertical-align: middle;
 }
-
-/*.github-link a:hover {
-    text-decoration: none;
-}*/
 
 .github-logo {
     height: 2em;
