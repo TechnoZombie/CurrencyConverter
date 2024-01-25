@@ -60,7 +60,6 @@ label {
     font-weight: bolder;
     color: black;
     font-size: 11px;
-    text-align: center;
 }
 
 .github-link {
@@ -69,7 +68,7 @@ label {
 }
 
 .github-logo {
-    height: 1em; /* Keep the aspect ratio of the logo */
+    height: 3em; 
     vertical-align: middle;
 }
 
