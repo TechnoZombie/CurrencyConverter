@@ -32,6 +32,5 @@ The project consists of the following files:
 - jQuery (v3.6.4)
 - ExchangeRate-API
 
-**License**
-
-This project is licensed under the MIT License.
+**License:**
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
