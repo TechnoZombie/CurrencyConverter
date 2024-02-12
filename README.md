@@ -1,15 +1,37 @@
 # CurrencyConverter
-Simple currency converter powered by Exchange Rate API 
+This project is a simple currency converter built using HTML, CSS, Bootstrap, jQuery, and the ExchangeRate-API. It allows users to convert an entered amount from one currency to another.
 
-The converter is presented in an HTML file with input for the amount to be converted and output fields for exchange rate and conversion result.
-It also has two buttons, one to convert the amount and another to reset all fields.
+**Features**
+- Dynamically loads currency options from currencyOptions.js.
+- Supports conversion between various currencies via ExchangeRate-API.
+- Displays the conversion rate and converted amount in real-time.
+- Includes reset functionality to clear entered values and reset the converter.
 
-Makes use of JavaScript and jQuery to manipulate DOM and event handling. 
-It uses an AJAX jquery $.ajax function to make an asynchronous HTTP request and incorporates error handling in the fetchData function.
+**LINK:** [https://technozombie.github.io/CurrencyConverter](https://technozombie.github.io/CurrencyConverter)
 
-The styling is made using CSS Bootstrap in an external script.
+**Usage**
+1. Enter an amount in the input box.
+2. Select the input currency from the dropdown list.
+3. Select the output currency from the dropdown list.
+4. Click the "Convert" button to calculate and display the converted amount.
+5. To reset the converter, click the "Reset" button.
 
-Features selectable currency on the Convert and Result sides.
-Conversion Rate will also show the Result currency once it has been selected.
+**Code Structure**
 
-LINK: https://technozombie.github.io/CurrencyConverter
+The project consists of the following files:
+
+- index.html: The main HTML file containing the structure of the currency converter.
+- currencyConverter.css: The CSS file for styling the currency converter.
+- currencyConverter.js: The JavaScript file handling user input, API calls, and data processing.
+- currencyOptions.js: The JavaScript file for dynamically loading currency options.
+
+**Technologies Used**
+- HTML
+- CSS
+- Bootstrap (v4.3.1)
+- jQuery (v3.6.4)
+- ExchangeRate-API
+
+**License**
+
+This project is licensed under the MIT License.
