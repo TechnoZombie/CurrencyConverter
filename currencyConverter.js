@@ -51,7 +51,7 @@ function calculate(result) {
         let convertedCurrency = amountToConvert * rate;
         // Limiting the result to two decimal places.
         $('#result').val(convertedCurrency.toFixed(2));
-        $('#rate').val(rate);
+        $('#rate').val(rate.toFixed(4));
     } else {
         console.error('Invalid data structure in API response.');
         $('#rate').val('ERROR!');
