@@ -6,6 +6,8 @@ This project is a simple currency converter built using HTML, CSS, Bootstrap, jQ
 - Supports conversion between various currencies via ExchangeRate-API.
 - Displays the conversion rate and converted amount in real-time.
 - Includes reset functionality to clear entered values and reset the converter.
+- Shows historical results.
+- Quickly switch "from" and "to" currencies;
 
 **LINK:** [https://technozombie.github.io/CurrencyConverter](https://technozombie.github.io/CurrencyConverter)
 
@@ -14,7 +16,9 @@ This project is a simple currency converter built using HTML, CSS, Bootstrap, jQ
 2. Select the input currency from the dropdown list.
 3. Select the output currency from the dropdown list.
 4. Click the "Convert" button to calculate and display the converted amount.
-5. To reset the converter, click the "Reset" button.
+5. To swap the "to" and "from" currencies, click on "Reverse" button.
+6. To reset the amount to convert and the result, click the "Reset Amount" button.
+7. To reset all fields, including History, click on "Reset All".
 
 **Code Structure**
 

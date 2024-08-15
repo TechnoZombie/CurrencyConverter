@@ -25,6 +25,7 @@ $(document).ready(function () {
         $('#rateCurrency').text(""); // Clear the currency symbol
         $('#inputCurrency').val(''); // Reset input currency dropdown
         $('#outputCurrency').val(''); // Reset output currency dropdown
+        $('#history').text('');
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
@@ -47,8 +48,8 @@ $(document).ready(function () {
 
         //Build the api url with new input currency
         API_URL = URL + inputSelectedCurrency;
-    });
 
+    });
 
     // Add an event listener to the outputCurrency dropdown
     $("#outputCurrency").change(function () {
@@ -63,9 +64,6 @@ $(document).ready(function () {
         inputSelectedCurrency = $(this).val();
         API_URL = URL + inputSelectedCurrency;
     });
-
-
-
 });
 
 function convertAmount(callBackFunction) {
@@ -77,6 +75,16 @@ function convertAmount(callBackFunction) {
             // Call the callback function with the result
             callBackFunction(result);
         }
+    });
+}
+
+function writeToHistory(amountToConvert, resultToAddtoHistory) {
+    const historyElements = document.querySelectorAll(".result-history");
+    historyElements.forEach(function (element) {
+        const newParagraph = document.createElement("p");
+        const newResult = document.createTextNode(amountToConvert + " " + inputSelectedCurrency + " = " + resultToAddtoHistory + " " + outputSelectedCurrency);
+        newParagraph.appendChild(newResult);
+        element.appendChild(newParagraph);
     });
 }
 
@@ -92,13 +100,19 @@ function calculate(result) {
             return;
         }
         let convertedCurrency = amountToConvert * rate;
+        testvalue = convertedCurrency;
         // Limiting the result to two decimal places.
         $('#result').val(convertedCurrency.toFixed(2));
         $('#rate').val(rate.toFixed(4));
+
+        writeToHistory(amountToConvert, convertedCurrency.toFixed(2));
+
     } else {
         console.error('Invalid data structure in API response.');
         $('#rate').val('ERROR!');
     }
+
+
 }
 
 //fetchData function for handling API requests with error callback

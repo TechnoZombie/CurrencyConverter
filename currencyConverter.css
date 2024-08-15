@@ -19,6 +19,33 @@ form {
     padding: 0;
 }
 
+.history-label {
+    display: block;
+    margin-top: 8px;
+    margin-left: 2px;
+    margin-bottom: 1px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.result-history {
+    max-width: 400px;
+    height: 100px;
+    background-color: #dee2e6;
+    padding: 4px;
+    border: 2px solid #dee2e6;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* This will allow the box to scroll vertically if the content exceeds the height */
+}
+
+.result-history p {
+    margin: 0; /* Removes all margins */
+    padding: 0; /* Removes any padding, if necessary */
+    line-height: 1.5; /* Adjust the line height if you want to control the spacing between lines */
+    font-size: small;
+}
+
 label {
     font-weight: bold;
 }
