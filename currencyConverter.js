@@ -14,6 +14,7 @@ $(document).ready(function () {
 
     resetAmountButton.click(function () {
         $("#amount").val(""); // Clear only the amount input field
+        $('#result').val(''); // Clear the result field
     });
 
     resetAllButton.click(function () {
