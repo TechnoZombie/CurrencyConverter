@@ -7,6 +7,7 @@ $(document).ready(function () {
     const convertButton = $('#buttonConvert');
     const resetAmountButton = $('#buttonResetAmount');
     const resetAllButton = $('#buttonResetAll');
+    const reverseButton = $('#reverseButton');
 
     convertButton.click(function () {
         convertAmount(calculate);
@@ -21,13 +22,33 @@ $(document).ready(function () {
         $("#amount").val(""); // Clear the amount input field
         $('#result').val(''); // Clear the result field
         $('#rate').val(''); // Clear the rate field
-        $("#rateCurrency").text(""); // Clear the currency symbol
+        $('#rateCurrency').text(""); // Clear the currency symbol
         $('#inputCurrency').val(''); // Reset input currency dropdown
         $('#outputCurrency').val(''); // Reset output currency dropdown
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
     });
+
+    reverseButton.click(function () {
+        let newOutput;
+        let newInput;
+
+        // Swapping the values
+        newInput = outputSelectedCurrency;
+        newOutput = inputSelectedCurrency;
+        inputSelectedCurrency = newInput;
+        outputSelectedCurrency = newOutput;
+
+        // Update the UI
+        $('#inputCurrency').val(inputSelectedCurrency);
+        $('#outputCurrency').val(outputSelectedCurrency);
+        $("#rateCurrency").text(outputSelectedCurrency);
+
+        //Build the api url with new input currency
+        API_URL = URL + inputSelectedCurrency;
+    });
+
 
     // Add an event listener to the outputCurrency dropdown
     $("#outputCurrency").change(function () {
@@ -42,6 +63,8 @@ $(document).ready(function () {
         inputSelectedCurrency = $(this).val();
         API_URL = URL + inputSelectedCurrency;
     });
+
+
 
 });
 

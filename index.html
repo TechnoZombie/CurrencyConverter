@@ -18,12 +18,12 @@
     <script src="currencyOptions.js"></script>
     <link rel="stylesheet" type="text/css" href="currencyConverter.css">
 </head>
-
+<body>
 <form>
     <label for="amount">Convert</label>
     <div class="input-group">
         <input type="text" id="amount" class="form-control" placeholder="Enter amount" aria-label="Amount to Convert"
-            aria-describedby="basic-addon2">
+               aria-describedby="basic-addon2">
         <div class="input-group-append">
             <select class="custom-select dynamic-select" id="inputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
@@ -52,6 +52,7 @@
     </div>
     <br>
 
+    <!--     <button type="button" id="reverseButton">Reverse</button>-->
     <button type="button" id="buttonConvert">Convert</button>
     <div class="resetButtons-group">
         <button type="button" id="buttonResetAmount">Reset Amount</button>

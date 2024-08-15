@@ -16,11 +16,15 @@ form {
 .input-group {
     border: 2px solid #dee2e6;
     border-radius: 5px;
-    padding: 0px;
+    padding: 0;
 }
 
 label {
     font-weight: bold;
+}
+
+span#rateCurrency {
+    width: 55px;
 }
 
 #buttonConvert {
