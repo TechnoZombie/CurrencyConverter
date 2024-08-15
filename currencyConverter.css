@@ -68,6 +68,11 @@ label {
     background-color: #c58100;
 }
 
+.resetButtons-group {
+    display: flex;
+    justify-content: space-between;
+}
+
 .footer {
     width: 100%;
     padding: 10px 0;

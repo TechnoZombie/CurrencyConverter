@@ -22,8 +22,8 @@
 <form>
     <label for="amount">Convert</label>
     <div class="input-group">
-        <input type="text" id="amount" class="form-control" placeholder="Enter amount"
-               aria-label="Amount to Convert" aria-describedby="basic-addon2">
+        <input type="text" id="amount" class="form-control" placeholder="Enter amount" aria-label="Amount to Convert"
+            aria-describedby="basic-addon2">
         <div class="input-group-append">
             <select class="custom-select dynamic-select" id="inputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
@@ -55,8 +55,10 @@
     <button type="button" id="buttonConvert">Convert</button>
     <br>
     <br>
-    <button type="reset" id="buttonResetAmount">Reset Amount</button>
-    <button type="reset" id="buttonResetAll">Reset All</button>
+    <div class="resetButtons-group">
+        <button type="button" id="buttonResetAmount">Reset Amount</button>
+        <button type="reset" id="buttonResetAll">Reset All</button>
+    </div>
     <br>
     <div class="footer">
         CurrencyConverter v1.5
@@ -64,11 +66,11 @@
         Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a>
         <br>
         <span class="github-link">
-        <a href="https://github.com/TechnoZombie/CurrencyConverter" target="_blank" rel="noopener noreferrer">
-            <img src="resources/github-logo.png" alt="GitHub Logo" class="github-logo">
-            <span class="text">View project on GitHub</span>
-        </a>
-    </span>
+            <a href="https://github.com/TechnoZombie/CurrencyConverter" target="_blank" rel="noopener noreferrer">
+                <img src="resources/github-logo.png" alt="GitHub Logo" class="github-logo">
+                <span class="text">View project on GitHub</span>
+            </a>
+        </span>
     </div>
 
 </form>
