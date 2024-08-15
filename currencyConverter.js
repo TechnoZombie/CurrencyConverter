@@ -5,21 +5,19 @@ let API_URL;
 
 $(document).ready(function () {
     const convertButton = $('#buttonConvert');
-    const resetButton = $('#buttonReset');
+    const resetAmountButton = $('#buttonResetAmount');
     const resetAllButton = $('#buttonResetAll');
 
     convertButton.click(function () {
         convertAmount(calculate);
     });
 
-    resetButton.click(function () {
-        $("#rateCurrency").text("");
+    resetAmountButton.click(function () {
+        $("#amount").text("");
     });
 
     resetAllButton.click(function () {
-        $("#rateCurrency").text("");
-        $('#result').val('');
-        $('#rate').val('');    
+        $("#rateCurrency").text("");    
     });
 
     // Add an event listener to the outputCurrency dropdown

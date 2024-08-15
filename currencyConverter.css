@@ -34,8 +34,8 @@ label {
     font-weight: bold;
 }
 
-#buttonReset {
-    width: 100%;
+#buttonResetAmount {
+    width: 50%;
     padding: 10px;
     background-color: darkorange;
     color: #fff;
@@ -46,7 +46,7 @@ label {
 }
 
 #buttonResetAll {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     background-color: darkorange;
     color: #fff;
@@ -60,7 +60,7 @@ label {
     background-color: #0056b3;
 }
 
-#buttonReset:hover {
+#buttonResetAmount:hover {
     background-color: #c58100;
 }
 
