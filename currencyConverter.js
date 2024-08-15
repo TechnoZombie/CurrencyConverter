@@ -44,10 +44,14 @@ function convertAmount(callBackFunction) {
 }
 
 function calculate(result) {
-    let rate = result.rates && result.rates[outputSelectedCurrency];
+    let rate = result?.rates?[outputSelectedCurrency] ?? null;
 
-    if (result && result.rates && rate !== undefined) {
-        let amountToConvert = $('#amount').val();
+    if (rate) {
+        let amountToConvert = parseFloat($('#amount').val());
+        if(isNaN(amountToConvert)){
+            console.error('Input value is not a number.');
+             $('#result').val('Enter a number');
+            return;
         let convertedCurrency = amountToConvert * rate;
         // Limiting the result to two decimal places.
         $('#result').val(convertedCurrency.toFixed(2));
