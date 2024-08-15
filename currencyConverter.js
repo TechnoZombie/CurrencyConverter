@@ -13,11 +13,19 @@ $(document).ready(function () {
     });
 
     resetAmountButton.click(function () {
-        $("#amount").text("");
+        $("#amount").val(""); // Clear only the amount input field
     });
 
     resetAllButton.click(function () {
-        $("#rateCurrency").text("");    
+        $("#amount").val(""); // Clear the amount input field
+        $('#result').val(''); // Clear the result field
+        $('#rate').val(''); // Clear the rate field
+        $("#rateCurrency").text(""); // Clear the currency symbol
+        $('#inputCurrency').val(''); // Reset input currency dropdown
+        $('#outputCurrency').val(''); // Reset output currency dropdown
+        inputSelectedCurrency = null;
+        outputSelectedCurrency = null;
+        API_URL = null;
     });
 
     // Add an event listener to the outputCurrency dropdown
@@ -54,9 +62,9 @@ function calculate(result) {
     //checking if input is a number.
     if (rate) {
         let amountToConvert = parseFloat($('#amount').val());
-        if(isNaN(amountToConvert)){
+        if (isNaN(amountToConvert)) {
             console.error('Input value is not a number.');
-             $('#result').val('Enter a number');
+            $('#result').val('Enter a valid number');
             return;
         }
         let convertedCurrency = amountToConvert * rate;
@@ -84,4 +92,3 @@ function fetchData(cb) {
         }
     });
 }
-
