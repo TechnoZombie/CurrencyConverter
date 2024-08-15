@@ -13,7 +13,13 @@ $(document).ready(function () {
 
     resetButton.click(function () {
         $("#rateCurrency").text("");
-    })
+    });
+
+        resetAllButton.click(function () {
+        $("#rateCurrency").text("");
+        $('#result').val('');
+        $('#rate').val('');    
+    });
 
     // Add an event listener to the outputCurrency dropdown
     $("#outputCurrency").change(function () {
@@ -52,6 +58,7 @@ function calculate(result) {
             console.error('Input value is not a number.');
              $('#result').val('Enter a number');
             return;
+        }
         let convertedCurrency = amountToConvert * rate;
         // Limiting the result to two decimal places.
         $('#result').val(convertedCurrency.toFixed(2));
