@@ -51,8 +51,9 @@ function convertAmount(callBackFunction) {
 }
 
 function calculate(result) {
-    let rate = result?.rates?[outputSelectedCurrency] ?? null;
+    let rate = result?.rates?.[outputSelectedCurrency] ?? null;
 
+    //checking if input is a number.
     if (rate) {
         let amountToConvert = parseFloat($('#amount').val());
         if(isNaN(amountToConvert)){
