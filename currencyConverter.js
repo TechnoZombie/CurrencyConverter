@@ -5,7 +5,8 @@ let API_URL;
 
 $(document).ready(function () {
     const convertButton = $('#buttonConvert');
-    const resetButton = $('#buttonReset')
+    const resetButton = $('#buttonReset');
+    const resetAllButton = $('#buttonResetAll');
 
     convertButton.click(function () {
         convertAmount(calculate);
@@ -15,7 +16,7 @@ $(document).ready(function () {
         $("#rateCurrency").text("");
     });
 
-        resetAllButton.click(function () {
+    resetAllButton.click(function () {
         $("#rateCurrency").text("");
         $('#result').val('');
         $('#rate').val('');    
