@@ -3,6 +3,74 @@ body {
     padding: 20px;
 }
 
+.switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+    padding-right: 5px;
+}
+
+.label-fiat, .label-crypto {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.label-fiat {
+    margin-right: 5px;
+}
+
+.label-crypto {
+    margin-left: 5px;
+    color: green;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin: 0 5px; /* Spacing between the switch and the labels */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 2.5px; /* Adjust the starting position */
+    bottom: 2.5px; /* Center vertically */
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: green;
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px); /* Adjust to match the new slider size */
+}
+
 form {
     max-width: 400px;
     margin: 0 auto;
@@ -11,6 +79,11 @@ form {
     border: 2px solid #dee2e6;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select {
+    margin-left: 1px;
+    border-radius: 5px;
 }
 
 .input-group {
@@ -24,7 +97,34 @@ form {
     margin-top: 8px;
     margin-left: 2px;
     margin-bottom: 1px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.rate-label {
+    display: block;
+    margin-top: 8px;
+    margin-left: 2px;
+    margin-bottom: 1px;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.amount-label {
+    display: block;
+    margin-top: 8px;
+    margin-left: 2px;
+    margin-bottom: 1px;
+    font-size: 1.0rem;
+    font-weight: bold;
+}
+
+.result-label {
+    display: block;
+    margin-top: 8px;
+    margin-left: 2px;
+    margin-bottom: 1px;
+    font-size: 1.0rem;
     font-weight: bold;
 }
 
@@ -40,9 +140,9 @@ form {
 }
 
 .result-history p {
-    margin: 0; /* Removes all margins */
-    padding: 0; /* Removes any padding, if necessary */
-    line-height: 1.5; /* Adjust the line height if you want to control the spacing between lines */
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
     font-size: small;
 }
 
@@ -51,7 +151,7 @@ label {
 }
 
 span#rateCurrency {
-    width: 55px;
+    width: 60px;
 }
 
 #buttonConvert {
@@ -66,7 +166,7 @@ span#rateCurrency {
     margin-bottom: 6px;
 }
 
-#reverseButton {
+#buttonResetAmount, #buttonResetAll, #reverseButton {
     width: 50%;
     padding: 10px;
     background-color: darkorange;
@@ -77,31 +177,6 @@ span#rateCurrency {
     font-weight: bold;
     font-size: small;
     margin-right: 3px;
-}
-
-#buttonResetAmount {
-    width: 50%;
-    padding: 10px;
-    background-color: darkorange;
-    color: #fff;
-    border: 2px solid #c58100;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: small;
-    margin-right: 3px;
-}
-
-#buttonResetAll {
-    width: 50%;
-    padding: 10px;
-    background-color: darkorange;
-    color: #fff;
-    border: 2px solid #c58100;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: small;
 }
 
 #buttonConvert:hover {

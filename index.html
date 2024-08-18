@@ -14,13 +14,21 @@
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script src="currencyConverter.js"></script>
-    <script src="currencyOptions.js"></script>
     <link rel="stylesheet" type="text/css" href="currencyConverter.css">
 </head>
 <body>
 <form>
-    <label for="amount">Convert</label>
+    <div class="switch-container">
+        <span class="label-fiat">Fiat</span>
+        <label class="switch">
+            <input type="checkbox" id="currencySwitch">
+            <span class="slider"></span>
+        </label>
+        <span class="label-crypto">Crypto</span>
+    </div>
+
+
+    <label for="amount" class="amount-label">Convert</label>
     <div class="input-group">
         <input type="text" id="amount" class="form-control" placeholder="Enter amount" aria-label="Amount to Convert"
                aria-describedby="basic-addon2">
@@ -32,7 +40,7 @@
     </div>
     <br>
 
-    <label for="result">Result</label>
+    <label for="result" class="result-label">Result</label>
     <div class="input-group">
         <input type="text" id="result" class="form-control" readonly>
         <div class="input-group-append">
@@ -43,7 +51,7 @@
     </div>
     <br>
 
-    <label for="rate"><small><b>Conversion Rate</b></small></label>
+    <label for="rate" class="rate-label">Conversion Rate</label>
     <div class="input-group">
         <input type="text" id="rate" class="form-control" readonly>
         <div class="input-group-append">
@@ -51,12 +59,12 @@
         </div>
     </div>
     <br>
-
     <button type="button" id="buttonConvert">Convert</button>
     <div class="resetButtons-group">
         <button type="button" id="reverseButton">Reverse</button>
         <button type="button" id="buttonResetAmount">Reset Amount</button>
         <button type="reset" id="buttonResetAll">Reset All</button>
+
     </div>
 
     <label for="history" class="history-label">History</label>
@@ -64,9 +72,10 @@
     </div>
 
     <div class="footer">
-        CurrencyConverter v2.0
+        CurrencyConverter v2.5
         <br>
-        Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a>
+        Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a> and <a
+            href="https://www.coinapi.io/">CoinAPI</a>
         <br>
         <span class="github-link">
             <a href="https://github.com/TechnoZombie/CurrencyConverter" target="_blank" rel="noopener noreferrer">
@@ -77,7 +86,9 @@
     </div>
 
 </form>
-
+<script src="currencyConverter.js"></script>
+<script src="cryptoExchangeCall.js"></script>
+<script src="currencyOptions.js"></script>
 </body>
 
 </html>

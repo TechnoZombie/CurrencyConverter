@@ -1,7 +1,10 @@
 let URL = 'https://open.er-api.com/v6/latest/';
 let inputSelectedCurrency;
 let outputSelectedCurrency;
+let cryptoRate;
 let API_URL;
+let isCrypto = false;
+
 
 $(document).ready(function () {
     const convertButton = $('#buttonConvert');
@@ -9,23 +12,23 @@ $(document).ready(function () {
     const resetAllButton = $('#buttonResetAll');
     const reverseButton = $('#reverseButton');
 
-    convertButton.click(function () {
-        convertAmount(calculate);
+    convertButton.click(async function () {
+        if (isCrypto === false) {
+            convertAmount(calculateFiat);
+        } else {
+            await setCryptoRate(inputSelectedCurrency, outputSelectedCurrency);
+            let amountToConvert = $('#amount').val();
+            standaloneCalculator(amountToConvert, cryptoRate);
+        }
     });
 
     resetAmountButton.click(function () {
-        $("#amount").val(""); // Clear only the amount input field
-        $('#result').val(''); // Clear the result field
+        resetFields('val',['#amount','#result'])
     });
 
     resetAllButton.click(function () {
-        $("#amount").val(""); // Clear the amount input field
-        $('#result').val(''); // Clear the result field
-        $('#rate').val(''); // Clear the rate field
-        $('#rateCurrency').text(""); // Clear the currency symbol
-        $('#inputCurrency').val(''); // Reset input currency dropdown
-        $('#outputCurrency').val(''); // Reset output currency dropdown
-        $('#history').text('');
+        resetFields("val",['#amount','#result','#rate','#inputCurrency','#outputCurrency'])
+        resetFields("text", ['#rateCurrency','#history'])
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
@@ -48,23 +51,31 @@ $(document).ready(function () {
 
         //Build the api url with new input currency
         API_URL = URL + inputSelectedCurrency;
-
     });
 
-    // Add an event listener to the outputCurrency dropdown
+    // Event listener for switch change
+    $('#currencySwitch').change(function () {
+        isCrypto = $(this).is(':checked');
+    });
+
+    // Event listener for the outputCurrency dropdown
     $("#outputCurrency").change(function () {
         // Get the selected value from the dropdown
         outputSelectedCurrency = $(this).val();
         $("#rateCurrency").text(outputSelectedCurrency);
     });
 
-    // Add an event listener to the inputCurrency dropdown
+    // Event listener for the inputCurrency dropdown
     $("#inputCurrency").change(function () {
         // Get the selected value from the dropdown
         inputSelectedCurrency = $(this).val();
         API_URL = URL + inputSelectedCurrency;
     });
 });
+
+async function setCryptoRate(fromCurrency, toCurrency) {
+    cryptoRate = await callCryptoRates(fromCurrency, toCurrency);
+}
 
 function convertAmount(callBackFunction) {
     fetchData(function (error, result) {
@@ -74,6 +85,50 @@ function convertAmount(callBackFunction) {
         } else {
             // Call the callback function with the result
             callBackFunction(result);
+        }
+    });
+}
+
+function calculateFiat(result) {
+    let rate = result?.rates?.[outputSelectedCurrency] ?? null;
+
+    // checking if input is a number.
+    if (rate) {
+        let amountToConvert = parseFloat($('#amount').val());
+        if (isNaN(amountToConvert)) {
+            console.error('Input value is not a number.');
+            $('#result').val('Enter a valid number');
+            return;
+        }
+        standaloneCalculator(amountToConvert, rate);
+    } else {
+        console.error('Invalid data structure in API response.');
+        $('#rate').val('ERROR!');
+    }
+}
+
+function standaloneCalculator(amountToConvert, rate) {
+    let convertedCurrency = amountToConvert * rate;
+
+    // Limiting the result to two decimal places.
+    $('#result').val(convertedCurrency.toFixed(2));
+    $('#rate').val(rate.toFixed(4));
+
+    writeToHistory(amountToConvert, convertedCurrency.toFixed(2));
+}
+
+// fetchData function for handling API requests with error callback
+function fetchData(cb) {
+    $.ajax({
+        url: API_URL,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success: function (results) {
+            cb(null, results);
+        },
+        error: function (request, statusText, httpError) {
+            cb(httpError || statusText);
         }
     });
 }
@@ -88,45 +143,14 @@ function writeToHistory(amountToConvert, resultToAddtoHistory) {
     });
 }
 
-function calculate(result) {
-    let rate = result?.rates?.[outputSelectedCurrency] ?? null;
-
-    //checking if input is a number.
-    if (rate) {
-        let amountToConvert = parseFloat($('#amount').val());
-        if (isNaN(amountToConvert)) {
-            console.error('Input value is not a number.');
-            $('#result').val('Enter a valid number');
-            return;
-        }
-        let convertedCurrency = amountToConvert * rate;
-        testvalue = convertedCurrency;
-        // Limiting the result to two decimal places.
-        $('#result').val(convertedCurrency.toFixed(2));
-        $('#rate').val(rate.toFixed(4));
-
-        writeToHistory(amountToConvert, convertedCurrency.toFixed(2));
-
-    } else {
-        console.error('Invalid data structure in API response.');
-        $('#rate').val('ERROR!');
+function resetFields(typeOfField, fields) {
+    if (typeOfField === "val") {
+        fields.forEach(field => {
+            $(field).val('');
+        });
+    } else if (typeOfField === "text") {
+        fields.forEach(field => {
+            $(field).text('');
+        });
     }
-
-
-}
-
-//fetchData function for handling API requests with error callback
-function fetchData(cb) {
-    $.ajax({
-        url: API_URL,
-        type: 'GET',
-        dataType: 'json',
-        async: true,
-        success: function (results) {
-            cb(null, results);
-        },
-        error: function (request, statusText, httpError) {
-            cb(httpError || statusText);
-        }
-    });
 }
