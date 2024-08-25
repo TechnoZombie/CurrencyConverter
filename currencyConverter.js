@@ -12,6 +12,8 @@ $(document).ready(function () {
     const resetAllButton = $('#buttonResetAll');
     const reverseButton = $('#reverseButton');
 
+    preloadCurrencyIcons();
+
     convertButton.click(async function () {
         if (isCrypto === false) {
             convertAmount(calculateFiat);
@@ -23,12 +25,12 @@ $(document).ready(function () {
     });
 
     resetAmountButton.click(function () {
-        resetFields('val',['#amount','#result'])
+        resetFields('val', ['#amount', '#result'])
     });
 
     resetAllButton.click(function () {
-        resetFields("val",['#amount','#result','#rate','#inputCurrency','#outputCurrency'])
-        resetFields("text", ['#rateCurrency','#history'])
+        resetFields("val", ['#amount', '#result', '#rate', '#inputCurrency', '#outputCurrency'])
+        resetFields("text", ['#rateCurrency', '#history'])
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
@@ -61,8 +63,20 @@ $(document).ready(function () {
     // Event listener for the outputCurrency dropdown
     $("#outputCurrency").change(function () {
         // Get the selected value from the dropdown
-        outputSelectedCurrency = $(this).val();
-        $("#rateCurrency").text(outputSelectedCurrency);
+        const outputSelectedCurrency = $(this).val();
+        //$("#rateCurrency").text(outputSelectedCurrency);
+        $("#rateCurrency").empty();
+
+        // Create a new img element and set its src attribute
+        const img = new Image();
+        img.src = getAssetUrl(outputSelectedCurrency);
+        img.onload = function () {
+            $("#rateCurrency").append($(img).addClass("loaded"));
+        };
+        img.onerror = function () {
+            // Handle the error by showing fallback text
+            $("#rateCurrency").text(outputSelectedCurrency);
+        };
     });
 
     // Event listener for the inputCurrency dropdown
