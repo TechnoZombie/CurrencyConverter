@@ -47,3 +47,7 @@ async function callCryptoRates(fromCurrency, toCurrency) {
         throw error;
     }
 }
+
+function provideKey() {
+    return apiKey
+}
