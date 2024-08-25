@@ -9,6 +9,7 @@ This project is a simple currency converter built using HTML, CSS, Bootstrap, jQ
 - Includes reset functionality to clear entered values and reset the converter.
 - Shows historical results.
 - Quickly switch "from" and "to" currencies;
+- Icons for the currencies are retrieved from the API on currencyIcons.js. If no icon is available, currency code will be shown.
 
 **LINK:** [https://technozombie.github.io/CurrencyConverter](https://technozombie.github.io/CurrencyConverter)
 
