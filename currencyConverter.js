@@ -49,8 +49,9 @@ $(document).ready(function () {
         // Update the UI
         $('#inputCurrency').val(inputSelectedCurrency);
         $('#outputCurrency').val(outputSelectedCurrency);
-        $("#rateCurrency").text(outputSelectedCurrency);
-
+        //$("#rateCurrency").text(outputSelectedCurrency);
+        setIcon();
+        
         //Build the api url with new input currency
         API_URL = URL + inputSelectedCurrency;
     });
@@ -65,19 +66,22 @@ $(document).ready(function () {
         // Get the selected value from the dropdown
         outputSelectedCurrency = $(this).val();
         //$("#rateCurrency").text(outputSelectedCurrency);
-        $("#rateCurrency").empty();
-
-        // Create a new img element and set its src attribute
-        const img = new Image();
-        img.src = getAssetUrl(outputSelectedCurrency);
-        img.onload = function () {
-            $("#rateCurrency").append($(img).addClass("loaded"));
-        };
-        img.onerror = function () {
-            // Handle the error by showing fallback text
-            $("#rateCurrency").text(outputSelectedCurrency);
-        };
+       setIcon();
     });
+function setIcon() {
+    $("#rateCurrency").empty();
+
+    // Create a new img element and set its src attribute
+    const img = new Image();
+    img.src = getAssetUrl(outputSelectedCurrency);
+    img.onload = function () {
+        $("#rateCurrency").append($(img).addClass("loaded"));
+    };
+    img.onerror = function () {
+        // Handle the error by showing fallback text
+        $("#rateCurrency").text(outputSelectedCurrency);
+    };
+}
 
     // Event listener for the inputCurrency dropdown
     $("#inputCurrency").change(function () {
