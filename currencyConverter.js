@@ -63,7 +63,7 @@ $(document).ready(function () {
     // Event listener for the outputCurrency dropdown
     $("#outputCurrency").change(function () {
         // Get the selected value from the dropdown
-        const outputSelectedCurrency = $(this).val();
+        outputSelectedCurrency = $(this).val();
         //$("#rateCurrency").text(outputSelectedCurrency);
         $("#rateCurrency").empty();
 
