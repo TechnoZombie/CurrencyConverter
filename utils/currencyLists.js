@@ -1,35 +1,4 @@
-function generateCurrencyOptions() {
-    const selectElements = document.querySelectorAll(".dynamic-select");
-
-    const currencyOptions = document.getElementById("currencySwitch").checked ? cryptoCurrencies : fiatCurrencies;
-
-    // Loop through all select elements with the class "dynamic-select"
-    selectElements.forEach(selectElement => {
-        selectElement.innerHTML = "";
-
-        // Setting the default option
-        const defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.textContent = "Select";
-        selectElement.appendChild(defaultOption);
-
-        // Loop to generate the options
-        for (let i = 0; i < currencyOptions.length; i++) {
-            const option = document.createElement("option");
-            option.value = currencyOptions[i];
-            option.textContent = currencyOptions[i];
-            selectElement.appendChild(option);
-        }
-    });
-}
-
-// Event listener for switch change
-document.getElementById("currencySwitch").addEventListener("change", generateCurrencyOptions);
-
-// Initial load
-document.addEventListener("DOMContentLoaded", generateCurrencyOptions);
-
-const fiatCurrencies = [
+export const fiatCurrencies = [
     "EUR", "USD", "GBP", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN",
     "BHD", "BIF", "BMD", "BND", "BOB", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CAD", "CDF", "CHF", "CLP", "CNY", "COP",
     "CRC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "FOK", "GEL", "GGP", "GHS",
@@ -42,7 +11,7 @@ const fiatCurrencies = [
     "XAF", "XCD", "XDR", "XOF", "XPF", "YER", "ZAR", "ZMW"
 ];
 
-const cryptoCurrencies = [
+export const cryptoCurrencies = [
     "EUR","USD","BTC", "ETH", "1INCH", "AAVE", "AKITA", "AKRO", "ALGO", "ALPHA", "AMP", "ANKR", "ANT", "APE", "APT", "ARB", "ARPA",
     "ATOM", "AUDIUS", "AVAX", "BABYDOGE", "BADGER", "BAL", "BAND", "BAT", "BCH", "BEL", "BLOX", "BNB", "BNX", "BNT", "BOND", "BUSD",
     "BTS", "COTI", "CHR", "COVER", "CREAM", "CVC", "DAI", "DAO", "DENT", "DEGO", "DFI", "DIA", "DODO", "DOGE", "DOCK",
@@ -55,4 +24,3 @@ const cryptoCurrencies = [
     "UMA", "UNI", "UOS", "USDC", "USDT", "UTK", "VET", "VIDT", "WAVES", "WBTC", "WNXM", "XLM", "XOR", "XPRT", "XRP",
     "XTZ", "YAM", "YAX", "YFI", "ZIL", "ZRX"
 ];
-
