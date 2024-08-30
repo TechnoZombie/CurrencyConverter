@@ -1,4 +1,4 @@
-import {fiatCurrencies, cryptoCurrencies} from "/utils/currencyLists.js";
+import {fiatCurrencies, cryptoCurrencies} from "/currencyLists.js";
 
 function generateCurrencyOptions() {
 
