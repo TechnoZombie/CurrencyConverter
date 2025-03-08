@@ -88,6 +88,14 @@ form {
     border: 0;
 }
 
+#rateCurrencyOut img.loaded {
+    width: 20px;
+    height: 20px;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border: 0;
+}
+
+
 .custom-select {
     margin-left: 1px;
     border-radius: 5px;

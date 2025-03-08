@@ -159,15 +159,28 @@ function resetFields(typeOfField, fields) {
 
 function setIcon() {
     $("#rateCurrency").empty();
+    $("#rateCurrencyOut").empty();
 
-    // Create a new img element and set its src attribute
-    const img = new Image();
-    img.src = getAssetUrl(outputSelectedCurrency);
-    img.onload = function () {
-        $("#rateCurrency").append($(img).addClass("loaded"));
+    // Create separate image elements for each container
+    const img1 = new Image();
+    const img2 = new Image();
+
+    img1.src = getAssetUrl(outputSelectedCurrency);
+    img2.src = getAssetUrl(outputSelectedCurrency);
+
+    img1.onload = function() {
+        $("#rateCurrency").append($(img1).addClass("loaded"));
     };
-    img.onerror = function () {
-        // Handle the error by showing fallback text
+
+    img2.onload = function() {
+        $("#rateCurrencyOut").append($(img2).addClass("loaded"));
+    };
+
+    img1.onerror = function() {
         $("#rateCurrency").text(outputSelectedCurrency);
+    };
+
+    img2.onerror = function() {
+        $("#rateCurrencyOut").text(outputSelectedCurrency);
     };
 }
