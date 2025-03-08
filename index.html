@@ -33,6 +33,10 @@
         <input type="text" id="amount" class="form-control" placeholder="Enter amount" aria-label="Amount to Convert"
                aria-describedby="basic-addon2">
         <div class="input-group-append">
+       <!--     <div class="input-group-append">
+                <span class="input-group-text" id="countryFlagIn"></span>
+            </div>
+            -->
             <select class="custom-select dynamic-select" id="inputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
             </select>
@@ -47,7 +51,7 @@
         <input type="text" id="result" class="form-control" readonly>
         <div class="input-group-append">
             <div class="input-group-append">
-                <span class="input-group-text" id="rateCurrencyOut"></span>
+                <span class="input-group-text" id="countryFlagOut"></span>
             </div>
             <select class="custom-select dynamic-select" id="outputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
@@ -95,6 +99,7 @@
 <script src="cryptoExchangeCall.js"></script>
 <script src="currencyOptions.js"></script>
 <script src="currencyIcons.js"></script>
+<script src="countryFlags.js"></script>
 
 </body>
 

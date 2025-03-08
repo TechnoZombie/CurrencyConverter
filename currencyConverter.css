@@ -88,13 +88,19 @@ form {
     border: 0;
 }
 
-#rateCurrencyOut img.loaded {
-    width: 20px;
-    height: 20px;
-    object-fit: cover; /* Ensures the image covers the area without distortion */
+#countryFlagIn img.loaded {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
     border: 0;
 }
 
+#countryFlagOut img.loaded {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+    border: 0;
+}
 
 .custom-select {
     margin-left: 1px;
@@ -166,6 +172,15 @@ label {
 }
 
 span#rateCurrency {
+    display: flex;
+    align-items: center;       /* Centers content vertically */
+    justify-content: center;   /* Centers content horizontally */
+    width: 60px;
+    overflow: hidden;
+    padding-left: 5px;
+}
+
+span#countryFlagOut {
     display: flex;
     align-items: center;       /* Centers content vertically */
     justify-content: center;   /* Centers content horizontally */

@@ -30,7 +30,7 @@ $(document).ready(function () {
 
     resetAllButton.click(function () {
         resetFields("val", ['#amount', '#result', '#rate', '#inputCurrency', '#outputCurrency'])
-        resetFields("text", ['#rateCurrency', '#history'])
+        resetFields("text", ['#rateCurrency', '#history', '#countryFlagIn', '#countryFlagOut'])
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
@@ -159,21 +159,21 @@ function resetFields(typeOfField, fields) {
 
 function setIcon() {
     $("#rateCurrency").empty();
-    $("#rateCurrencyOut").empty();
+    $("#countryFlagOut").empty();
 
     // Create separate image elements for each container
     const img1 = new Image();
     const img2 = new Image();
 
     img1.src = getAssetUrl(outputSelectedCurrency);
-    img2.src = getAssetUrl(outputSelectedCurrency);
-
+    img2.src = 'https://flagsapi.com/'+currencyToCountryCodeMap.get(outputSelectedCurrency)+'/shiny/32.png'
+console.log(img2.src);
     img1.onload = function() {
         $("#rateCurrency").append($(img1).addClass("loaded"));
     };
 
     img2.onload = function() {
-        $("#rateCurrencyOut").append($(img2).addClass("loaded"));
+        $("#countryFlagOut").append($(img2).addClass("loaded"));
     };
 
     img1.onerror = function() {
