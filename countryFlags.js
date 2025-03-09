@@ -3,10 +3,17 @@ function setFlagIcon(elementId, currency) {
     const flag = new Image();
     console.log(currency);
 
-    if (currency == "EUR") {
-        flag.src = `resources/EU.png`;
+    // CountryFlag API does not have EU flag available so it needs to be local.
+    if (currency === "EUR") {
+        flag.src = 'resources/EU.png';
+        flag.alt = countryCodeToNameMap.get("EU");
+        flag.title = "European Union";
+
     } else {
-        flag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(currency)}/shiny/32.png`;
+        const countryCode = currencyToCountryCodeMap.get(currency);
+        const countryName = countryCodeToNameMap.get(countryCode);
+        flag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
+        flag.alt = flag.title = countryName;
     }
 
     flag.onload = function () {
@@ -15,11 +22,14 @@ function setFlagIcon(elementId, currency) {
 
     flag.onerror = function () {
         console.error(`Failed to load flag for ${currency}`);
-        $(`#${elementId}`).text(currency);
+        flag.src = 'resources/NoFlag.png'
+        flag.alt = "Flag unavailable"
+        flag.title = "Flag unavailable for this currency"
+        $(`#${elementId}`).empty().append($(flag).addClass("loaded"));
     };
 }
 
-// Uses .get() to retrieve values (currencyToCountryCodeMap.get("USD") → "US").
+// Use .get() to retrieve values (currencyToCountryCodeMap.get("USD") → "US").
 const currencyToCountryCodeMap = new Map([
     ["EUR", "EU"],
     ["USD", "US"],
@@ -183,4 +193,166 @@ const currencyToCountryCodeMap = new Map([
     ["ZAR", "ZA"],
     ["ZMW", "ZM"]
 ]);
+
+const countryCodeToNameMap = new Map([
+    ["EU", "European Union"],
+    ["US", "United States"],
+    ["GB", "United Kingdom"],
+    ["AE", "United Arab Emirates"],
+    ["AF", "Afghanistan"],
+    ["AL", "Albania"],
+    ["AM", "Armenia"],
+    ["CW", "Curaçao"],
+    ["AO", "Angola"],
+    ["AR", "Argentina"],
+    ["AU", "Australia"],
+    ["AW", "Aruba"],
+    ["AZ", "Azerbaijan"],
+    ["BA", "Bosnia and Herzegovina"],
+    ["BB", "Barbados"],
+    ["BD", "Bangladesh"],
+    ["BG", "Bulgaria"],
+    ["BH", "Bahrain"],
+    ["BI", "Burundi"],
+    ["BM", "Bermuda"],
+    ["BN", "Brunei Darussalam"],
+    ["BO", "Bolivia"],
+    ["BR", "Brazil"],
+    ["BS", "Bahamas"],
+    ["BT", "Bhutan"],
+    ["BW", "Botswana"],
+    ["BY", "Belarus"],
+    ["BZ", "Belize"],
+    ["CA", "Canada"],
+    ["CD", "Congo (DRC)"],
+    ["CH", "Switzerland"],
+    ["CL", "Chile"],
+    ["CN", "China"],
+    ["CO", "Colombia"],
+    ["CR", "Costa Rica"],
+    ["CU", "Cuba"],
+    ["CV", "Cabo Verde"],
+    ["CZ", "Czech Republic"],
+    ["DJ", "Djibouti"],
+    ["DK", "Denmark"],
+    ["DO", "Dominican Republic"],
+    ["DZ", "Algeria"],
+    ["EG", "Egypt"],
+    ["ER", "Eritrea"],
+    ["ET", "Ethiopia"],
+    ["FJ", "Fiji"],
+    ["FK", "Falkland Islands"],
+    ["FO", "Faroe Islands"],
+    ["GE", "Georgia"],
+    ["GG", "Guernsey"],
+    ["GH", "Ghana"],
+    ["GI", "Gibraltar"],
+    ["GM", "Gambia"],
+    ["GN", "Guinea"],
+    ["GT", "Guatemala"],
+    ["GY", "Guyana"],
+    ["HK", "Hong Kong"],
+    ["HN", "Honduras"],
+    ["HR", "Croatia"],
+    ["HT", "Haiti"],
+    ["HU", "Hungary"],
+    ["ID", "Indonesia"],
+    ["IL", "Israel"],
+    ["IM", "Isle of Man"],
+    ["IN", "India"],
+    ["IQ", "Iraq"],
+    ["IR", "Iran"],
+    ["IS", "Iceland"],
+    ["JE", "Jersey"],
+    ["JM", "Jamaica"],
+    ["JO", "Jordan"],
+    ["JP", "Japan"],
+    ["KE", "Kenya"],
+    ["KG", "Kyrgyzstan"],
+    ["KH", "Cambodia"],
+    ["KI", "Kiribati"],
+    ["KM", "Comoros"],
+    ["KR", "South Korea"],
+    ["KW", "Kuwait"],
+    ["KY", "Cayman Islands"],
+    ["KZ", "Kazakhstan"],
+    ["LA", "Laos"],
+    ["LB", "Lebanon"],
+    ["LK", "Sri Lanka"],
+    ["LR", "Liberia"],
+    ["LS", "Lesotho"],
+    ["LY", "Libya"],
+    ["MA", "Morocco"],
+    ["MD", "Moldova"],
+    ["MG", "Madagascar"],
+    ["MK", "North Macedonia"],
+    ["MM", "Myanmar"],
+    ["MN", "Mongolia"],
+    ["MO", "Macao"],
+    ["MR", "Mauritania"],
+    ["MU", "Mauritius"],
+    ["MV", "Maldives"],
+    ["MW", "Malawi"],
+    ["MX", "Mexico"],
+    ["MY", "Malaysia"],
+    ["MZ", "Mozambique"],
+    ["NA", "Namibia"],
+    ["NG", "Nigeria"],
+    ["NI", "Nicaragua"],
+    ["NO", "Norway"],
+    ["NP", "Nepal"],
+    ["NZ", "New Zealand"],
+    ["OM", "Oman"],
+    ["PA", "Panama"],
+    ["PE", "Peru"],
+    ["PG", "Papua New Guinea"],
+    ["PH", "Philippines"],
+    ["PK", "Pakistan"],
+    ["PL", "Poland"],
+    ["PY", "Paraguay"],
+    ["QA", "Qatar"],
+    ["RO", "Romania"],
+    ["RS", "Serbia"],
+    ["RU", "Russia"],
+    ["RW", "Rwanda"],
+    ["SA", "Saudi Arabia"],
+    ["SB", "Solomon Islands"],
+    ["SC", "Seychelles"],
+    ["SD", "Sudan"],
+    ["SE", "Sweden"],
+    ["SG", "Singapore"],
+    ["SH", "Saint Helena"],
+    ["SL", "Sierra Leone"],
+    ["SO", "Somalia"],
+    ["SR", "Suriname"],
+    ["SS", "South Sudan"],
+    ["ST", "Sao Tome and Principe"],
+    ["SY", "Syria"],
+    ["SZ", "Eswatini"],
+    ["TH", "Thailand"],
+    ["TJ", "Tajikistan"],
+    ["TM", "Turkmenistan"],
+    ["TN", "Tunisia"],
+    ["TO", "Tonga"],
+    ["TR", "Turkey"],
+    ["TT", "Trinidad and Tobago"],
+    ["TV", "Tuvalu"],
+    ["TW", "Taiwan"],
+    ["TZ", "Tanzania"],
+    ["UA", "Ukraine"],
+    ["UG", "Uganda"],
+    ["UY", "Uruguay"],
+    ["UZ", "Uzbekistan"],
+    ["VE", "Venezuela"],
+    ["VN", "Vietnam"],
+    ["VU", "Vanuatu"],
+    ["WS", "Samoa"],
+    ["CF", "Central African Republic"],
+    ["AI", "Anguilla"],
+    ["PF", "French Polynesia"],
+    ["YE", "Yemen"],
+    ["ZA", "South Africa"],
+    ["ZM", "Zambia"]
+]);
+
 
