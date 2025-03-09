@@ -1,3 +1,36 @@
+function setOutputFlagIcon() {
+    $("#countryFlagOut").empty();
+
+    const outputFlag = new Image();
+
+    const countryCode = currencyToCountryCodeMap.get(outputSelectedCurrency) || 'unknown';
+    outputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
+    console.log(outputFlag)
+    outputFlag.onload = function () {
+        $("#countryFlagOut").append($(outputFlag).addClass("loaded"));
+    };
+
+    outputFlag.onerror = function () {
+        $("#rateCurrencyOut").text(outputSelectedCurrency);
+    };
+}
+
+function setInputFlagIcon() {
+    $("#countryFlagIn").empty();
+    const inputFlag = new Image();
+
+    const countryCode = currencyToCountryCodeMap.get(inputSelectedCurrency) || 'unknown';
+    inputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
+    console.log(inputFlag)
+    inputFlag.onload = function () {
+        $("#countryFlagIn").append($(inputFlag).addClass("loaded"));
+    };
+
+    inputFlag.onerror = function () {
+        $("#rateCurrencyIn").text(outputSelectedCurrency);
+    };
+}
+
 // Uses .get() to retrieve values (currencyToCountryCodeMap.get("USD") → "US").
 const currencyToCountryCodeMap = new Map([
     ["EUR", "EU"],

@@ -29,33 +29,34 @@ $(document).ready(function () {
     });
 
     resetAllButton.click(function () {
+
+        $('#currencySwitch').prop('checked', false);
+        generateCurrencyOptions();
+
         resetFields("val", ['#amount', '#result', '#rate', '#inputCurrency', '#outputCurrency'])
         resetFields("text", ['#rateCurrency', '#history', '#countryFlagIn', '#countryFlagOut'])
+
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
     });
 
     reverseButton.click(function () {
-        let newOutput;
-        let newInput;
 
-        // Swapping the values
-        newInput = outputSelectedCurrency;
-        newOutput = inputSelectedCurrency;
-        inputSelectedCurrency = newInput;
-        outputSelectedCurrency = newOutput;
+        // Destructuring assignment to swap the values
+        [inputSelectedCurrency, outputSelectedCurrency] = [outputSelectedCurrency, inputSelectedCurrency];
 
         // Update the UI
         $('#inputCurrency').val(inputSelectedCurrency);
         $('#outputCurrency').val(outputSelectedCurrency);
-        setInputFlagIcon()
-        setOutputFlagIcon();
         setCurrencyIcon();
+        setOutputFlagIcon();
+        setInputFlagIcon();
 
         //Build the api url with new input currency
-        API_URL = URL + inputSelectedCurrency;
+        API_URL = `${URL}${inputSelectedCurrency}`;
     });
+
 
     // Event listener for switch change
     $('#currencySwitch').change(function () {
@@ -66,6 +67,7 @@ $(document).ready(function () {
     $("#outputCurrency").change(function () {
         // Get the selected value from the dropdown
         outputSelectedCurrency = $(this).val();
+        setOutputFlagIcon();
         setCurrencyIcon();
     });
 
@@ -74,6 +76,7 @@ $(document).ready(function () {
         // Get the selected value from the dropdown
         inputSelectedCurrency = $(this).val();
         API_URL = URL + inputSelectedCurrency;
+        setInputFlagIcon();
     });
 });
 
@@ -155,39 +158,6 @@ function resetFields(typeOfField, fields) {
             $(field).text('');
         });
     }
-}
-
-function setOutputFlagIcon() {
-    $("#countryFlagOut").empty();
-
-    const outputFlag = new Image();
-
-    const countryCode = currencyToCountryCodeMap.get(outputSelectedCurrency) || 'unknown';
-    outputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
-
-    outputFlag.onload = function () {
-        $("#countryFlagOut").append($(outputFlag).addClass("loaded"));
-    };
-
-    outputFlag.onerror = function () {
-        $("#rateCurrencyOut").text(outputSelectedCurrency);
-    };
-}
-
-function setInputFlagIcon() {
-    $("countryFlagIn").empty();
-    const inputFlag = new Image();
-
-    const countryCode = currencyToCountryCodeMap.get(inputSelectedCurrency) || 'unknown';
-    inputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
-
-    inputFlag.onload = function () {
-        $("#countryFlagIn").append($(inputFlag).addClass("loaded"));
-    };
-
-    inputFlag.onerror = function () {
-        $("#rateCurrencyIn").text(outputSelectedCurrency);
-    };
 }
 
 

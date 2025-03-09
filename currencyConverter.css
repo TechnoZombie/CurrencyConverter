@@ -175,19 +175,40 @@ span#rateCurrency {
     display: flex;
     align-items: center;       /* Centers content vertically */
     justify-content: center;   /* Centers content horizontally */
-    width: 60px;
+    width: 40px;
     overflow: hidden;
-    padding-left: 5px;
+    padding-left: 15px;
 }
 
-span#countryFlagOut {
+span#countryFlagOut,
+span#countryFlagIn {
+
     display: flex;
-    align-items: center;       /* Centers content vertically */
-    justify-content: center;   /* Centers content horizontally */
-    width: 60px;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 0;
     overflow: hidden;
-    padding-left: 5px;
+
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    position: relative;
+    flex: 1 1 auto;
+    margin-bottom: 0;
+    opacity: 1;
 }
+
 
 #buttonConvert {
     width: 100%;
