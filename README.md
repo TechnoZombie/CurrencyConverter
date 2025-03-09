@@ -10,6 +10,7 @@ This project is a simple currency converter built using HTML, CSS, Bootstrap, jQ
 - Shows historical results.
 - Quickly switch "from" and "to" currencies;
 - Icons for the currencies are retrieved from the API on currencyIcons.js. If no icon is available, currency code will be shown.
+- Country flags are shown next to the currency code when selected. Flags provided by CoutryFlags api.
 
 **LINK:** [https://technozombie.github.io/CurrencyConverter](https://technozombie.github.io/CurrencyConverter)
 
@@ -32,6 +33,7 @@ The project consists of the following files:
 - currencyConverter.js: The JavaScript file handling user input, API calls, and data processing.
 - currencyOptions.js: The JavaScript file for dynamically loading currency options.
 - cryptoExchangeCall.js: A JavaScript file that handles logic for the crypto API calls.
+- countryFlags.js: JavaScript file that holds all the logic for flag selection as well as mapping from currency code to country code.
 
 **Technologies Used**
 - JavaScript
@@ -41,6 +43,7 @@ The project consists of the following files:
 - jQuery (v3.6.4)
 - ExchangeRate-API
 - CoinAPI
+- CountryFlags API
 
 **License:**
 
