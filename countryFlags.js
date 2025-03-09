@@ -1,16 +1,22 @@
 function setFlagIcon(elementId, currency) {
     $(`#${elementId}`).empty();
     const flag = new Image();
-    flag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(currency)}/shiny/32.png`;
+    console.log(currency);
+
+    if (currency == "EUR") {
+        flag.src = `resources/EU.png`;
+    } else {
+        flag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(currency)}/shiny/32.png`;
+    }
 
     flag.onload = function () {
         $(`#${elementId}`).append($(flag).addClass("loaded"));
     };
 
-  /*  flag.onerror = function () {
+    flag.onerror = function () {
+        console.error(`Failed to load flag for ${currency}`);
         $(`#${elementId}`).text(currency);
     };
-   */
 }
 
 // Uses .get() to retrieve values (currencyToCountryCodeMap.get("USD") → "US").
