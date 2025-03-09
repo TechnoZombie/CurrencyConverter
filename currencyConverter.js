@@ -81,17 +81,15 @@ async function setCryptoRate(fromCurrency, toCurrency) {
     cryptoRate = await callCryptoRates(fromCurrency, toCurrency);
 }
 
-function convertAmount(callBackFunction) {
-    fetchData(function (error, result) {
-        if (error) {
-            // Handle error
-            console.error('Error fetching data:', error);
-        } else {
-            // Call the callback function with the result
-            callBackFunction(result);
-        }
-    });
+async function convertAmount(callBackFunction) {
+    try {
+        let result = await fetchData();
+        callBackFunction(result);
+    } catch (error) {
+        $('#rate').val('ERROR!');
+    }
 }
+
 
 function calculateFiat(result) {
     let rate = result?.rates?.[outputSelectedCurrency] ?? null;
@@ -121,21 +119,21 @@ function standaloneCalculator(amountToConvert, rate) {
     writeToHistory(amountToConvert, convertedCurrency.toFixed(2));
 }
 
-// fetchData function for handling API requests with error callback
-function fetchData(cb) {
-    $.ajax({
-        url: API_URL,
-        type: 'GET',
-        dataType: 'json',
-        async: true,
-        success: function (results) {
-            cb(null, results);
-        },
-        error: function (request, statusText, httpError) {
-            cb(httpError || statusText);
-        }
-    });
+async function fetchData() {
+    try {
+        let response = await $.ajax({
+            url: API_URL,
+            type: 'GET',
+            dataType: 'json',
+            async: true
+        });
+        return response;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
 }
+
 
 function writeToHistory(amountToConvert, resultToAddtoHistory) {
     const historyElements = document.querySelectorAll(".result-history");
@@ -160,10 +158,12 @@ function resetFields(typeOfField, fields) {
 }
 
 function setOutputFlagIcon() {
-    $("countryFlagOut").empty();
+    $("#countryFlagOut").empty();
+
     const outputFlag = new Image();
 
-    outputFlag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(outputSelectedCurrency)}/shiny/32.png`;
+    const countryCode = currencyToCountryCodeMap.get(outputSelectedCurrency) || 'unknown';
+    outputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
 
     outputFlag.onload = function () {
         $("#countryFlagOut").append($(outputFlag).addClass("loaded"));
@@ -178,7 +178,8 @@ function setInputFlagIcon() {
     $("countryFlagIn").empty();
     const inputFlag = new Image();
 
-    inputFlag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(inputSelectedCurrency)}/shiny/32.png`;
+    const countryCode = currencyToCountryCodeMap.get(inputSelectedCurrency) || 'unknown';
+    inputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
 
     inputFlag.onload = function () {
         $("#countryFlagIn").append($(inputFlag).addClass("loaded"));
@@ -198,7 +199,7 @@ function setCurrencyIcon() {
     currencyIcon.src = getAssetUrl(outputSelectedCurrency);
 
     currencyIcon.onload = function () {
-        $("#rateCurrency").append($(img1).addClass("loaded"));
+        $("#rateCurrency").append($(currencyIcon).addClass("loaded"));
     };
 
     currencyIcon.onerror = function () {
