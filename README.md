@@ -1,5 +1,5 @@
 # CurrencyConverter
-This project is a simple currency converter built using HTML, CSS, Bootstrap, jQuery, ExchangeRate-API and CoinAPI. It allows users to convert an entered amount from one currency to another.
+This project is a simple currency converter built using HTML, CSS, Bootstrap, jQuery, ExchangeRate-API, CoinAPI and CountryFlags API. It allows users to convert an entered amount from one currency to another.
 
 **Features**
 - Dynamically loads currency options from currencyOptions.js.
