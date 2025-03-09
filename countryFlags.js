@@ -3,11 +3,11 @@ function setFlagIcon(elementId, currency) {
     const flag = new Image();
     console.log(currency);
 
-    // CountryFlag API does not have EU flag available so it needs to be local.
+    // CountryFlag API does not have EU flag available, so it needs to be local.
     if (currency === "EUR") {
+        const countryName = countryCodeToNameMap.get("EU");
         flag.src = 'resources/EU.png';
-        flag.alt = countryCodeToNameMap.get("EU");
-        flag.title = "European Union";
+        flag.alt = flag.title = countryName;
 
     } else {
         const countryCode = currencyToCountryCodeMap.get(currency);
