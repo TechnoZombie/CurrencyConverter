@@ -33,10 +33,15 @@
         <input type="text" id="amount" class="form-control" placeholder="Enter amount" aria-label="Amount to Convert"
                aria-describedby="basic-addon2">
         <div class="input-group-append">
+            <div class="input-group-append">
+                <span class="input-group-text" id="countryFlagIn"></span>
+            </div>
             <select class="custom-select dynamic-select" id="inputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
             </select>
+
         </div>
+
     </div>
     <br>
 
@@ -44,9 +49,13 @@
     <div class="input-group">
         <input type="text" id="result" class="form-control" readonly>
         <div class="input-group-append">
+            <div class="input-group-append">
+                <span class="input-group-text" id="countryFlagOut"></span>
+            </div>
             <select class="custom-select dynamic-select" id="outputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
             </select>
+
         </div>
     </div>
     <br>
@@ -74,8 +83,8 @@
     <div class="footer">
         CurrencyConverter v2.5
         <br>
-        Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a> and <a
-            href="https://www.coinapi.io/">CoinAPI</a>
+        Powered by <a href="https://www.exchangerate-api.com/">ExchangeRate-API</a>, <a
+            href="https://www.coinapi.io/">CoinAPI</a> and <a href="https://flagsapi.com/">CountryFlags</a>
         <br>
         <span class="github-link">
             <a href="https://github.com/TechnoZombie/CurrencyConverter" target="_blank" rel="noopener noreferrer">
@@ -89,6 +98,7 @@
 <script src="cryptoExchangeCall.js"></script>
 <script src="currencyOptions.js"></script>
 <script src="currencyIcons.js"></script>
+<script src="countryFlags.js"></script>
 
 </body>
 
