@@ -49,7 +49,9 @@ $(document).ready(function () {
         // Update the UI
         $('#inputCurrency').val(inputSelectedCurrency);
         $('#outputCurrency').val(outputSelectedCurrency);
-        setIcon();
+        setInputFlagIcon()
+        setOutputFlagIcon();
+        setCurrencyIcon();
 
         //Build the api url with new input currency
         API_URL = URL + inputSelectedCurrency;
@@ -64,7 +66,7 @@ $(document).ready(function () {
     $("#outputCurrency").change(function () {
         // Get the selected value from the dropdown
         outputSelectedCurrency = $(this).val();
-       setIcon();
+        setCurrencyIcon();
     });
 
     // Event listener for the inputCurrency dropdown
@@ -157,30 +159,51 @@ function resetFields(typeOfField, fields) {
     }
 }
 
-function setIcon() {
+function setOutputFlagIcon() {
+    $("countryFlagOut").empty();
+    const outputFlag = new Image();
+
+    outputFlag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(outputSelectedCurrency)}/shiny/32.png`;
+
+    outputFlag.onload = function () {
+        $("#countryFlagOut").append($(outputFlag).addClass("loaded"));
+    };
+
+    outputFlag.onerror = function () {
+        $("#rateCurrencyOut").text(outputSelectedCurrency);
+    };
+}
+
+function setInputFlagIcon() {
+    $("countryFlagIn").empty();
+    const inputFlag = new Image();
+
+    inputFlag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(inputSelectedCurrency)}/shiny/32.png`;
+
+    inputFlag.onload = function () {
+        $("#countryFlagIn").append($(inputFlag).addClass("loaded"));
+    };
+
+    inputFlag.onerror = function () {
+        $("#rateCurrencyIn").text(outputSelectedCurrency);
+    };
+}
+
+
+function setCurrencyIcon() {
     $("#rateCurrency").empty();
-    $("#countryFlagOut").empty();
 
-    // Create separate image elements for each container
-    const img1 = new Image();
-    const img2 = new Image();
+    const currencyIcon = new Image();
 
-    img1.src = getAssetUrl(outputSelectedCurrency);
-    img2.src = 'https://flagsapi.com/'+currencyToCountryCodeMap.get(outputSelectedCurrency)+'/shiny/32.png'
-console.log(img2.src);
-    img1.onload = function() {
+    currencyIcon.src = getAssetUrl(outputSelectedCurrency);
+
+    currencyIcon.onload = function () {
         $("#rateCurrency").append($(img1).addClass("loaded"));
     };
 
-    img2.onload = function() {
-        $("#countryFlagOut").append($(img2).addClass("loaded"));
-    };
-
-    img1.onerror = function() {
+    currencyIcon.onerror = function () {
         $("#rateCurrency").text(outputSelectedCurrency);
     };
 
-    img2.onerror = function() {
-        $("#rateCurrencyOut").text(outputSelectedCurrency);
-    };
+
 }
