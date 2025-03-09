@@ -7,9 +7,10 @@ function setFlagIcon(elementId, currency) {
         $(`#${elementId}`).append($(flag).addClass("loaded"));
     };
 
-    flag.onerror = function () {
+  /*  flag.onerror = function () {
         $(`#${elementId}`).text(currency);
     };
+   */
 }
 
 // Uses .get() to retrieve values (currencyToCountryCodeMap.get("USD") → "US").
