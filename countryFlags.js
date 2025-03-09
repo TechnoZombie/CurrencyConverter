@@ -1,33 +1,14 @@
-function setOutputFlagIcon() {
-    $("#countryFlagOut").empty();
+function setFlagIcon(elementId, currency) {
+    $(`#${elementId}`).empty();
+    const flag = new Image();
+    flag.src = `https://flagsapi.com/${currencyToCountryCodeMap.get(currency)}/shiny/32.png`;
 
-    const outputFlag = new Image();
-
-    const countryCode = currencyToCountryCodeMap.get(outputSelectedCurrency) || 'unknown';
-    outputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
-    console.log(outputFlag)
-    outputFlag.onload = function () {
-        $("#countryFlagOut").append($(outputFlag).addClass("loaded"));
+    flag.onload = function () {
+        $(`#${elementId}`).append($(flag).addClass("loaded"));
     };
 
-    outputFlag.onerror = function () {
-        $("#rateCurrencyOut").text(outputSelectedCurrency);
-    };
-}
-
-function setInputFlagIcon() {
-    $("#countryFlagIn").empty();
-    const inputFlag = new Image();
-
-    const countryCode = currencyToCountryCodeMap.get(inputSelectedCurrency) || 'unknown';
-    inputFlag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
-    console.log(inputFlag)
-    inputFlag.onload = function () {
-        $("#countryFlagIn").append($(inputFlag).addClass("loaded"));
-    };
-
-    inputFlag.onerror = function () {
-        $("#rateCurrencyIn").text(outputSelectedCurrency);
+    flag.onerror = function () {
+        $(`#${elementId}`).text(currency);
     };
 }
 

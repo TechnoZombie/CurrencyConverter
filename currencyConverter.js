@@ -5,7 +5,6 @@ let cryptoRate;
 let API_URL;
 let isCrypto = false;
 
-
 $(document).ready(function () {
     const convertButton = $('#buttonConvert');
     const resetAmountButton = $('#buttonResetAmount');
@@ -50,8 +49,9 @@ $(document).ready(function () {
         $('#inputCurrency').val(inputSelectedCurrency);
         $('#outputCurrency').val(outputSelectedCurrency);
         setCurrencyIcon();
-        setOutputFlagIcon();
-        setInputFlagIcon();
+        setFlagIcon("countryFlagIn", inputSelectedCurrency);
+        setFlagIcon("countryFlagOut", outputSelectedCurrency);
+
 
         //Build the api url with new input currency
         API_URL = `${URL}${inputSelectedCurrency}`;
@@ -67,7 +67,7 @@ $(document).ready(function () {
     $("#outputCurrency").change(function () {
         // Get the selected value from the dropdown
         outputSelectedCurrency = $(this).val();
-        setOutputFlagIcon();
+        setFlagIcon("countryFlagOut", outputSelectedCurrency);
         setCurrencyIcon();
     });
 
@@ -76,7 +76,7 @@ $(document).ready(function () {
         // Get the selected value from the dropdown
         inputSelectedCurrency = $(this).val();
         API_URL = URL + inputSelectedCurrency;
-        setInputFlagIcon();
+        setFlagIcon("countryFlagIn", inputSelectedCurrency);
     });
 });
 
@@ -125,10 +125,7 @@ function standaloneCalculator(amountToConvert, rate) {
 async function fetchData() {
     try {
         let response = await $.ajax({
-            url: API_URL,
-            type: 'GET',
-            dataType: 'json',
-            async: true
+            url: API_URL, type: 'GET', dataType: 'json', async: true
         });
         return response;
     } catch (error) {
@@ -136,7 +133,6 @@ async function fetchData() {
         throw error;
     }
 }
-
 
 function writeToHistory(amountToConvert, resultToAddtoHistory) {
     const historyElements = document.querySelectorAll(".result-history");

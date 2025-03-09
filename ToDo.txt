@@ -1,0 +1,4 @@
+1. Find a country flag api
+2. Set the options menu to show flags from the api
+3. Have an onhover or alt to show country name on each flag
+4. Find a way to match the flag to a country code or directly to a currency code
