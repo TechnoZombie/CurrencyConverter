@@ -1,52 +1,32 @@
-function generateCurrencyOptions() {
+function generateOptions(selectElements, optionsArray) {
+    selectElements.forEach(selectElement => {
+        selectElement.innerHTML = "";
 
+        // Setting the default option
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Select";
+        selectElement.appendChild(defaultOption);
+
+        // Loop to generate the options
+        optionsArray.forEach(optionValue => {
+            const option = document.createElement("option");
+            option.value = optionValue;
+            option.textContent = optionValue;
+            selectElement.appendChild(option);
+        });
+    });
+}
+
+function generateCurrencyOptions() {
     const selectElements = document.querySelectorAll(".dynamic-select");
     const currencyOptions = document.getElementById("currencySwitch").checked ? cryptoCurrencies : fiatCurrencies;
     const fiatDisplay = document.getElementById("countriesSwitch").checked ? countryNames : fiatCurrencies;
 
-
     if (fiatDisplay === countryNames) {
-        console.log("display country names")
-    } else if (fiatDisplay === fiatCurrencies) {
-        console.log("display currency codes")
-    }
-    if (fiatDisplay === countryNames) {
-        selectElements.forEach(selectElement => {
-            selectElement.innerHTML = "";
-
-            // Setting the default option
-            const defaultOption = document.createElement("option");
-            defaultOption.value = "";
-            defaultOption.textContent = "Select";
-            selectElement.appendChild(defaultOption);
-
-            // Loop to generate the options
-            for (let i = 0; i < fiatDisplay.length; i++) {
-                const option = document.createElement("option");
-                option.value = fiatDisplay[i];
-                option.textContent = fiatDisplay[i];
-                selectElement.appendChild(option);
-            }
-        });
+        generateOptions(selectElements, fiatDisplay);
     } else {
-        // Loop through all select elements with the class "dynamic-select"
-        selectElements.forEach(selectElement => {
-            selectElement.innerHTML = "";
-
-            // Setting the default option
-            const defaultOption = document.createElement("option");
-            defaultOption.value = "";
-            defaultOption.textContent = "Select";
-            selectElement.appendChild(defaultOption);
-
-            // Loop to generate the options
-            for (let i = 0; i < currencyOptions.length; i++) {
-                const option = document.createElement("option");
-                option.value = currencyOptions[i];
-                option.textContent = currencyOptions[i];
-                selectElement.appendChild(option);
-            }
-        });
+        generateOptions(selectElements, currencyOptions);
     }
 }
 
