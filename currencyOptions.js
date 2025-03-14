@@ -47,7 +47,7 @@ const fiatCurrencies = [
     "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB",
     "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SLL", "SOS", "SRD", "SSP", "STN", "SYP", "SZL", "THB",
     "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TVD", "TWD", "TZS", "UAH", "UGX", "UYU", "UZS", "VES", "VND", "VUV", "WST",
-    "XAF", "XCD", "XDR", "XOF", "XPF", "YER", "ZAR", "ZMW"
+    "XAF", "XCD", "XOF", "XPF", "YER", "ZAR", "ZMW"
 ];
 
 const cryptoCurrencies = [
@@ -65,20 +65,20 @@ const cryptoCurrencies = [
 ];
 
 const countryNames = [
-    "European Union", "United States", "United Kingdom", "UA Emirates", "Afghanistan", "Albania", "Armenia",
+    "Euro Union", "USA", "Utd Kingdom", "UA Emirates", "Afghanistan", "Albania", "Armenia",
     "Curaçao", "Angola", "Argentina", "Australia", "Aruba", "Azerbaijan", "Bos Herzegov", "Barbados", "Bangladesh",
-    "Bulgaria", "Bahrain", "Burundi", "Bermuda", "Brunei Darussalam", "Bolivia", "Brazil", "Bahamas", "Bhutan", "Botswana",
+    "Bulgaria", "Bahrain", "Burundi", "Bermuda", "Brunei", "Bolivia", "Brazil", "Bahamas", "Bhutan", "Botswana",
     "Belarus", "Belize", "Canada", "Congo", "Switzerland", "Chile", "China", "Colombia", "Costa Rica", "Cuba", "Cabo Verde",
-    "Czech Republic", "Djibouti", "Denmark", "Dominican Republic", "Algeria", "Egypt", "Eritrea", "Ethiopia", "Fiji",
-    "Falkland Islands", "Faroe Islands", "Georgia", "Guernsey", "Ghana", "Gibraltar", "Gambia", "Guinea", "Guatemala", "Guyana",
-    "Hong Kong", "Honduras", "Croatia", "Haiti", "Hungary", "Indonesia", "Israel", "Isle of Man", "India", "Iraq", "Iran", "Iceland",
+    "Czech Rep", "Djibouti", "Denmark", "Dom Republic", "Algeria", "Egypt", "Eritrea", "Ethiopia", "Fiji",
+    "Falkland Isl", "Faroe Isl", "Georgia", "Guernsey", "Ghana", "Gibraltar", "Gambia", "Guinea", "Guatemala", "Guyana",
+    "Hong Kong", "Honduras", "Croatia", "Haiti", "Hungary", "Indonesia", "Israel", "Isl of Man", "India", "Iraq", "Iran", "Iceland",
     "Jersey", "Jamaica", "Jordan", "Japan", "Kenya", "Kyrgyzstan", "Cambodia", "Kiribati", "Comoros", "South Korea", "Kuwait",
     "Cayman Isl", "Kazakhstan", "Laos", "Lebanon", "Sri Lanka", "Liberia", "Lesotho", "Libya", "Morocco", "Moldova",
-    "Madagascar", "North Macedonia", "Myanmar", "Mongolia", "Macao", "Mauritania", "Mauritius", "Maldives", "Malawi", "Mexico",
+    "Madagascar", "N.Macedonia", "Myanmar", "Mongolia", "Macao", "Mauritania", "Mauritius", "Maldives", "Malawi", "Mexico",
     "Malaysia", "Mozambique", "Namibia", "Nigeria", "Nicaragua", "Norway", "Nepal", "New Zealand", "Oman", "Panama", "Peru",
-    "Papua New Guinea", "Philippines", "Pakistan", "Poland", "Paraguay", "Qatar", "Romania", "Serbia", "Russia", "Rwanda",
-    "Saudi Arabia", "Solomon Islands", "Seychelles", "Sudan", "Sweden", "Singapore", "Saint Helena", "Sierra Leone", "Somalia",
-    "Suriname", "South Sudan", "S. Tome Principe", "Syria", "Eswatini", "Thailand", "Tajikistan", "Turkmenistan", "Tunisia",
+    "Papua N Guinea", "Philippines", "Pakistan", "Poland", "Paraguay", "Qatar", "Romania", "Serbia", "Russia", "Rwanda",
+    "Saudi Arabia", "Solomon Isl.", "Seychelles", "Sudan", "Sweden", "Singapore", "Saint Helena", "Sierra Leone", "Somalia",
+    "Suriname", "South Sudan", "S.Tome Principe", "Syria", "Eswatini", "Thailand", "Tajikistan", "Turkmenistan", "Tunisia",
     "Tonga", "Turkey", "Trin Tobago", "Tuvalu", "Taiwan", "Tanzania", "Ukraine", "Uganda", "Uruguay", "Uzbekistan",
-    "Venezuela", "Vietnam", "Vanuatu", "Samoa", "C. African Rep.", "French Polynesia", "Yemen", "South Africa", "Zambia"
+    "Venezuela", "Vietnam", "Vanuatu", "Samoa", "C.African Rep.", "French Poly", "Yemen", "South Africa", "Zambia"
 ];
