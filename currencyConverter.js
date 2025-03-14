@@ -241,8 +241,6 @@ $(document).ready(function () {
 
         if (display === countryNames) {
             return true;
-        } else {
-            return false;
         }
     }
 
