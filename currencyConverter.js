@@ -1,150 +1,176 @@
-let URL = 'https://open.er-api.com/v6/latest/';
-let inputSelectedCurrency;
-let outputSelectedCurrency;
-let cryptoRate;
-let API_URL;
-let isCrypto = false;
+/**
+ * Currency Converter Application
+ * This application allows users to convert between different currencies using real-time exchange rates.
+ * Features include support for fiat currencies, country name display options, and conversion history.
+ */
+
+// Global variables for application state
+let URL = 'https://open.er-api.com/v6/latest/';  // Base URL for exchange rate API
+let inputSelectedCurrency;                       // Selected input currency code
+let outputSelectedCurrency;                      // Selected output currency code
+let cryptoRate;                                  // Exchange rate for crypto conversions
+let API_URL;                                     // Complete API URL with selected currency
+let isCrypto = false;                            // Flag to indicate if crypto mode is active
 
 $(document).ready(function () {
+    // UI control elements
     const convertButton = $('#buttonConvert');
     const resetAmountButton = $('#buttonResetAmount');
     const resetAllButton = $('#buttonResetAll');
     const reverseButton = $('#reverseButton');
 
+    // Initialize by preloading currency icons
     preloadCurrencyIcons();
 
+    /**
+     * Convert button click handler - initiates currency conversion
+     * Handles both fiat and crypto conversions
+     */
     convertButton.click(async function () {
-
         if (!isCrypto) {
+            // For fiat currencies, use standard API
             convertAmount(calculateFiat);
         } else {
+            // For crypto, get special rates and calculate
             await setCryptoRate(inputSelectedCurrency, outputSelectedCurrency);
             let amountToConvert = $('#amount').val();
-
             standaloneCalculator(amountToConvert, cryptoRate);
         }
     });
 
+    /**
+     * Helper function to map country names to currency codes
+     * @param {string} country - The country name
+     * @param {string} currency - The current currency code
+     */
     function setCurrencyCodeFromCountry(country, currency) {
         if (currency === inputSelectedCurrency) {
             inputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
         } else if (currency === outputSelectedCurrency) {
             outputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
         }
-
     };
 
+    /**
+     * Reset amount fields only
+     */
     resetAmountButton.click(function () {
         resetFields('val', ['#amount', '#result'])
     });
 
+    /**
+     * Reset all fields and settings to default
+     */
     resetAllButton.click(function () {
-
+        // Reset switches
         $('#currencySwitch').prop('checked', false);
         $('#countriesSwitch').prop('checked', false);
 
+        // Regenerate currency options
         generateCurrencyOptions();
 
+        // Reset all input fields and displays
         resetFields("val", ['#amount', '#result', '#rate', '#inputCurrency', '#outputCurrency'])
         resetFields("text", ['#rateCurrency', '#history', '#countryFlagIn', '#countryFlagOut'])
 
+        // Reset global variables
         inputSelectedCurrency = null;
         outputSelectedCurrency = null;
         API_URL = null;
     });
 
+    /**
+     * Reverse button handler - swaps input and output currencies
+     * Updates all UI elements to reflect the swap
+     */
     reverseButton.click(function () {
-
-        // Destructuring assignment to swap the values
+        // Swap currencies using destructuring assignment
         [inputSelectedCurrency, outputSelectedCurrency] = [outputSelectedCurrency, inputSelectedCurrency];
 
         if (isDisplayCountries()) {
             // Update country names in UI
             $('#inputCurrency').val(currencyCodeToCountryNameMap.get(inputSelectedCurrency));
             $('#outputCurrency').val(currencyCodeToCountryNameMap.get(outputSelectedCurrency));
-
         } else {
             // Update the currency codes in UI
             $('#inputCurrency').val(inputSelectedCurrency);
             $('#outputCurrency').val(outputSelectedCurrency);
         }
 
-        // Update UI
+        // Update UI elements
         setCurrencyIcon();
         setFlagIcon("countryFlagIn", inputSelectedCurrency);
         setFlagIcon("countryFlagOut", outputSelectedCurrency);
 
-        //Build the api url with new input currency
+        // Build the API URL with new input currency
         API_URL = `${URL}${inputSelectedCurrency}`;
-
     });
 
-// Event listener for switch change
+    /**
+     * Toggle between crypto and fiat currency modes
+     */
     $('#currencySwitch').change(function () {
         isCrypto = $(this).is(':checked');
     });
 
-    // Event listener for the inputCurrency dropdown
+    /**
+     * Input currency dropdown change handler
+     * Updates currency code and UI elements based on selection
+     */
     $("#inputCurrency").change(function () {
-
-
         if (isDisplayCountries()) {
-            // Get the selected country name from the dropdown
+            // Get the selected country name and convert to currency code
             const inputSelectedCountry = $(this).val();
-
-            // Convert output currency from the country name to currency code
             setCurrencyCodeFromCountry(inputSelectedCountry, inputSelectedCurrency);
 
-
-            // Build the API URL after ensuring inputSelectedCurrency is set
+            // Build the API URL after ensuring currency code is set
             if (inputSelectedCurrency) {
                 API_URL = URL + inputSelectedCurrency;
             } else {
                 console.error("inputSelectedCurrency is undefined after setting currency code.");
             }
-
-            // Update the flag icon
-            setFlagIcon("countryFlagIn", inputSelectedCurrency);
         } else {
-            // Directly set inputSelectedCurrency from the dropdown value
+            // Directly set currency code from dropdown value
             inputSelectedCurrency = $(this).val();
-
-            // Build the API URL
             API_URL = URL + inputSelectedCurrency;
-
-            // Update the flag icon
-            setFlagIcon("countryFlagIn", inputSelectedCurrency);
         }
 
+        // Update the flag icon
+        setFlagIcon("countryFlagIn", inputSelectedCurrency);
     });
 
-// Event listener for the outputCurrency dropdown
+    /**
+     * Output currency dropdown change handler
+     * Updates currency code and UI elements based on selection
+     */
     $("#outputCurrency").change(function () {
-
-
         if (isDisplayCountries()) {
-            // Get the selected country name from the dropdown
+            // Get the selected country name and convert to currency code
             const outputSelectedCountry = $(this).val();
-
-            // Convert the country name to currency code
             setCurrencyCodeFromCountry(outputSelectedCountry, outputSelectedCurrency);
-
-            // Update the flag and currency icon
-            setFlagIcon("countryFlagOut", outputSelectedCurrency);
-            setCurrencyIcon();
         } else {
-            // Directly set outputSelectedCurrency from the dropdown value
+            // Directly set currency code from dropdown value
             outputSelectedCurrency = $(this).val();
-            setFlagIcon("countryFlagOut", outputSelectedCurrency);
-            setCurrencyIcon();
         }
+
+        // Update UI elements
+        setFlagIcon("countryFlagOut", outputSelectedCurrency);
+        setCurrencyIcon();
     });
 
-
+    /**
+     * Sets the crypto exchange rate
+     * @param {string} fromCurrency - Source currency code
+     * @param {string} toCurrency - Target currency code
+     */
     async function setCryptoRate(fromCurrency, toCurrency) {
         cryptoRate = await callCryptoRates(fromCurrency, toCurrency);
     }
 
+    /**
+     * Initiates the conversion process with error handling
+     * @param {Function} callBackFunction - Function to call with API result
+     */
     async function convertAmount(callBackFunction) {
         try {
             let result = await fetchData();
@@ -154,11 +180,14 @@ $(document).ready(function () {
         }
     }
 
-
+    /**
+     * Calculates and displays fiat currency conversion
+     * @param {Object} result - API response with exchange rates
+     */
     function calculateFiat(result) {
         let rate = result?.rates?.[outputSelectedCurrency] ?? null;
 
-        // checking if input is a number.
+        // Process conversion if rate is available
         if (rate) {
             let amountToConvert = parseFloat($('#amount').val());
             if (isNaN(amountToConvert)) {
@@ -173,20 +202,33 @@ $(document).ready(function () {
         }
     }
 
+    /**
+     * Core calculator function used by both fiat and crypto conversions
+     * @param {number} amountToConvert - Amount to convert
+     * @param {number} rate - Exchange rate
+     */
     function standaloneCalculator(amountToConvert, rate) {
         let convertedCurrency = amountToConvert * rate;
 
-        // Limiting the result to two decimal places.
+        // Display results with fixed decimal precision
         $('#result').val(convertedCurrency.toFixed(2));
         $('#rate').val(rate.toFixed(4));
 
+        // Record the conversion in history
         writeToHistory(amountToConvert, convertedCurrency.toFixed(2));
     }
 
+    /**
+     * Fetches exchange rate data from API
+     * @returns {Promise<Object>} - API response with exchange rates
+     */
     async function fetchData() {
         try {
             let response = await $.ajax({
-                url: API_URL, type: 'GET', dataType: 'json', async: true
+                url: API_URL,
+                type: 'GET',
+                dataType: 'json',
+                async: true
             });
             return response;
         } catch (error) {
@@ -195,6 +237,11 @@ $(document).ready(function () {
         }
     }
 
+    /**
+     * Adds a conversion record to the history display
+     * @param {number} amountToConvert - Original amount
+     * @param {string} resultToAddtoHistory - Converted amount
+     */
     function writeToHistory(amountToConvert, resultToAddtoHistory) {
         const historyElements = document.querySelectorAll(".result-history");
         historyElements.forEach(function (element) {
@@ -205,6 +252,11 @@ $(document).ready(function () {
         });
     }
 
+    /**
+     * Utility function to reset multiple fields
+     * @param {string} typeOfField - Type of field to reset ('val' or 'text')
+     * @param {Array<string>} fields - Array of field selectors
+     */
     function resetFields(typeOfField, fields) {
         if (typeOfField === "val") {
             fields.forEach(field => {
@@ -217,12 +269,14 @@ $(document).ready(function () {
         }
     }
 
-
+    /**
+     * Sets the currency icon for the rate display
+     * Falls back to text if image fails to load
+     */
     function setCurrencyIcon() {
         $("#rateCurrency").empty();
 
         const currencyIcon = new Image();
-
         currencyIcon.src = getAssetUrl(outputSelectedCurrency);
 
         currencyIcon.onload = function () {
@@ -234,14 +288,18 @@ $(document).ready(function () {
         };
     }
 
-
+    /**
+     * Determines if country names should be displayed instead of currency codes
+     * @returns {boolean} - True if country names should be displayed
+     */
     function isDisplayCountries() {
         const isCountriesChecked = document.getElementById("countriesSwitch").checked;
         const display = isCountriesChecked ? countryNames : fiatCurrencies;
 
         if (display === countryNames) {
             return true;
+        } else {
+            return false;
         }
     }
-
 });
