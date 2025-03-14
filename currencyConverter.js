@@ -54,22 +54,30 @@ $(document).ready(function () {
     });
 
     reverseButton.click(function () {
-    // TODO: Bugfix - In country name mode, when reversing country names are not being displayed
 
         // Destructuring assignment to swap the values
         [inputSelectedCurrency, outputSelectedCurrency] = [outputSelectedCurrency, inputSelectedCurrency];
 
-        // Update the UI
-        $('#inputCurrency').val(inputSelectedCurrency);
-        $('#outputCurrency').val(outputSelectedCurrency);
+        if (isDisplayCountries()) {
+            // Update country names in UI
+            $('#inputCurrency').val(currencyCodeToCountryNameMap.get(inputSelectedCurrency));
+            $('#outputCurrency').val(currencyCodeToCountryNameMap.get(outputSelectedCurrency));
+
+        } else {
+            // Update the currency codes in UI
+            $('#inputCurrency').val(inputSelectedCurrency);
+            $('#outputCurrency').val(outputSelectedCurrency);
+        }
+
+        // Update UI
         setCurrencyIcon();
         setFlagIcon("countryFlagIn", inputSelectedCurrency);
         setFlagIcon("countryFlagOut", outputSelectedCurrency);
 
         //Build the api url with new input currency
         API_URL = `${URL}${inputSelectedCurrency}`;
-    });
 
+    });
 
 // Event listener for switch change
     $('#currencySwitch').change(function () {
@@ -78,9 +86,9 @@ $(document).ready(function () {
 
     // Event listener for the inputCurrency dropdown
     $("#inputCurrency").change(function () {
-        const fiatDisplay = document.getElementById("countriesSwitch").checked ? countryNames : fiatCurrencies;
 
-        if (fiatDisplay === countryNames) {
+
+        if (isDisplayCountries()) {
             // Get the selected country name from the dropdown
             const inputSelectedCountry = $(this).val();
 
@@ -112,9 +120,9 @@ $(document).ready(function () {
 
 // Event listener for the outputCurrency dropdown
     $("#outputCurrency").change(function () {
-        const fiatDisplay = document.getElementById("countriesSwitch").checked ? countryNames : fiatCurrencies;
 
-        if (fiatDisplay === countryNames) {
+
+        if (isDisplayCountries()) {
             // Get the selected country name from the dropdown
             const outputSelectedCountry = $(this).val();
 
@@ -224,6 +232,18 @@ $(document).ready(function () {
         currencyIcon.onerror = function () {
             $("#rateCurrency").text(outputSelectedCurrency);
         };
+    }
+
+
+    function isDisplayCountries() {
+        const isCountriesChecked = document.getElementById("countriesSwitch").checked;
+        const display = isCountriesChecked ? countryNames : fiatCurrencies;
+
+        if (display === countryNames) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 });
