@@ -54,27 +54,30 @@ $(document).ready(function () {
     });
 
     reverseButton.click(function () {
-    // TODO: Bugfix - In country name mode, when reversing country names are not being displayed
 
         // Destructuring assignment to swap the values
         [inputSelectedCurrency, outputSelectedCurrency] = [outputSelectedCurrency, inputSelectedCurrency];
 
-        // Update the UI
-        $('#inputCurrency').val(inputSelectedCurrency);
-        $('#outputCurrency').val(outputSelectedCurrency);
+        if (isDisplayCountries()) {
+            // Update country names in UI
+            $('#inputCurrency').val(currencyCodeToCountryNameMap.get(inputSelectedCurrency));
+            $('#outputCurrency').val(currencyCodeToCountryNameMap.get(outputSelectedCurrency));
+
+        } else {
+            // Update the currency codes in UI
+            $('#inputCurrency').val(inputSelectedCurrency);
+            $('#outputCurrency').val(outputSelectedCurrency);
+        }
+
+        // Update UI
         setCurrencyIcon();
         setFlagIcon("countryFlagIn", inputSelectedCurrency);
         setFlagIcon("countryFlagOut", outputSelectedCurrency);
 
         //Build the api url with new input currency
         API_URL = `${URL}${inputSelectedCurrency}`;
+
     });
-
-
-
-
-    
-
 
 // Event listener for switch change
     $('#currencySwitch').change(function () {
