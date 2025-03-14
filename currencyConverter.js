@@ -71,6 +71,11 @@ $(document).ready(function () {
     });
 
 
+
+
+    
+
+
 // Event listener for switch change
     $('#currencySwitch').change(function () {
         isCrypto = $(this).is(':checked');
@@ -78,9 +83,9 @@ $(document).ready(function () {
 
     // Event listener for the inputCurrency dropdown
     $("#inputCurrency").change(function () {
-        const fiatDisplay = document.getElementById("countriesSwitch").checked ? countryNames : fiatCurrencies;
 
-        if (fiatDisplay === countryNames) {
+
+        if (isDisplayCountries()) {
             // Get the selected country name from the dropdown
             const inputSelectedCountry = $(this).val();
 
@@ -112,9 +117,9 @@ $(document).ready(function () {
 
 // Event listener for the outputCurrency dropdown
     $("#outputCurrency").change(function () {
-        const fiatDisplay = document.getElementById("countriesSwitch").checked ? countryNames : fiatCurrencies;
 
-        if (fiatDisplay === countryNames) {
+
+        if (isDisplayCountries()) {
             // Get the selected country name from the dropdown
             const outputSelectedCountry = $(this).val();
 
@@ -224,6 +229,18 @@ $(document).ready(function () {
         currencyIcon.onerror = function () {
             $("#rateCurrency").text(outputSelectedCurrency);
         };
+    }
+
+
+    function isDisplayCountries() {
+        const isCountriesChecked = document.getElementById("countriesSwitch").checked;
+        const display = isCountriesChecked ? countryNames : fiatCurrencies;
+
+        if (display === countryNames) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 });
