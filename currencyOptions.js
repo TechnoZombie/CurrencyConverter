@@ -1,9 +1,4 @@
-function generateCurrencyOptions() {
-
-    const selectElements = document.querySelectorAll(".dynamic-select");
-    const currencyOptions = document.getElementById("currencySwitch").checked ? cryptoCurrencies : fiatCurrencies;
-
-    // Loop through all select elements with the class "dynamic-select"
+function generateOptions(selectElements, optionsArray) {
     selectElements.forEach(selectElement => {
         selectElement.innerHTML = "";
 
@@ -14,17 +9,30 @@ function generateCurrencyOptions() {
         selectElement.appendChild(defaultOption);
 
         // Loop to generate the options
-        for (let i = 0; i < currencyOptions.length; i++) {
+        optionsArray.forEach(optionValue => {
             const option = document.createElement("option");
-            option.value = currencyOptions[i];
-            option.textContent = currencyOptions[i];
+            option.value = optionValue;
+            option.textContent = optionValue;
             selectElement.appendChild(option);
-        }
+        });
     });
+}
+
+function generateCurrencyOptions() {
+    const selectElements = document.querySelectorAll(".dynamic-select");
+    const currencyOptions = document.getElementById("currencySwitch").checked ? cryptoCurrencies : fiatCurrencies;
+    const fiatDisplay = document.getElementById("countriesSwitch").checked ? countryNames : fiatCurrencies;
+
+    if (fiatDisplay === countryNames) {
+        generateOptions(selectElements, fiatDisplay);
+    } else {
+        generateOptions(selectElements, currencyOptions);
+    }
 }
 
 // Event listener for switch change
 document.getElementById("currencySwitch").addEventListener("change", generateCurrencyOptions);
+document.getElementById("countriesSwitch").addEventListener("change", generateCurrencyOptions);
 
 // Initial load
 document.addEventListener("DOMContentLoaded", generateCurrencyOptions);
@@ -39,7 +47,7 @@ const fiatCurrencies = [
     "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB",
     "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SLL", "SOS", "SRD", "SSP", "STN", "SYP", "SZL", "THB",
     "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TVD", "TWD", "TZS", "UAH", "UGX", "UYU", "UZS", "VES", "VND", "VUV", "WST",
-    "XAF", "XCD", "XDR", "XOF", "XPF", "YER", "ZAR", "ZMW"
+    "XAF", "XCD", "XOF", "XPF", "YER", "ZAR", "ZMW"
 ];
 
 const cryptoCurrencies = [
@@ -54,4 +62,23 @@ const cryptoCurrencies = [
     "SOL", "SPELL", "SRM", "STAKE", "STORJ", "STX", "SUSHI", "SXP", "TCT", "THETA", "TON", "TRB", "TRX", "TROY",
     "UMA", "UNI", "UOS", "USDC", "USDT", "UTK", "VET", "VIDT", "WAVES", "WBTC", "WNXM", "XLM", "XOR", "XPRT", "XRP",
     "XTZ", "YAM", "YAX", "YFI", "ZIL", "ZRX"
+];
+
+const countryNames = [
+    "Euro Union", "USA", "Utd Kingdom", "UA Emirates", "Afghanistan", "Albania", "Armenia",
+    "Curaçao", "Angola", "Argentina", "Australia", "Aruba", "Azerbaijan", "Bos Herzegov", "Barbados", "Bangladesh",
+    "Bulgaria", "Bahrain", "Burundi", "Bermuda", "Brunei", "Bolivia", "Brazil", "Bahamas", "Bhutan", "Botswana",
+    "Belarus", "Belize", "Canada", "Congo", "Switzerland", "Chile", "China", "Colombia", "Costa Rica", "Cuba", "Cabo Verde",
+    "Czech Rep", "Djibouti", "Denmark", "Dom Republic", "Algeria", "Egypt", "Eritrea", "Ethiopia", "Fiji",
+    "Falkland Isl", "Faroe Isl", "Georgia", "Guernsey", "Ghana", "Gibraltar", "Gambia", "Guinea", "Guatemala", "Guyana",
+    "Hong Kong", "Honduras", "Croatia", "Haiti", "Hungary", "Indonesia", "Israel", "Isl of Man", "India", "Iraq", "Iran", "Iceland",
+    "Jersey", "Jamaica", "Jordan", "Japan", "Kenya", "Kyrgyzstan", "Cambodia", "Kiribati", "Comoros", "South Korea", "Kuwait",
+    "Cayman Isl", "Kazakhstan", "Laos", "Lebanon", "Sri Lanka", "Liberia", "Lesotho", "Libya", "Morocco", "Moldova",
+    "Madagascar", "N.Macedonia", "Myanmar", "Mongolia", "Macao", "Mauritania", "Mauritius", "Maldives", "Malawi", "Mexico",
+    "Malaysia", "Mozambique", "Namibia", "Nigeria", "Nicaragua", "Norway", "Nepal", "New Zealand", "Oman", "Panama", "Peru",
+    "Papua N Guinea", "Philippines", "Pakistan", "Poland", "Paraguay", "Qatar", "Romania", "Serbia", "Russia", "Rwanda",
+    "Saudi Arabia", "Solomon Isl.", "Seychelles", "Sudan", "Sweden", "Singapore", "Saint Helena", "Sierra Leone", "Somalia",
+    "Suriname", "South Sudan", "S.Tome Principe", "Syria", "Eswatini", "Thailand", "Tajikistan", "Turkmenistan", "Tunisia",
+    "Tonga", "Turkey", "Trin Tobago", "Tuvalu", "Taiwan", "Tanzania", "Ukraine", "Uganda", "Uruguay", "Uzbekistan",
+    "Venezuela", "Vietnam", "Vanuatu", "Samoa", "C.African Rep.", "French Poly", "Yemen", "South Africa", "Zambia"
 ];
