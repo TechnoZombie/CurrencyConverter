@@ -42,8 +42,8 @@
         <input type="text" id="amount" class="form-control" placeholder="Enter amount" aria-label="Amount to Convert"
                aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <div class="input-group-append">
-                <span class="input-group-text" id="countryFlagIn"></span>
+            <div class="input-group-append" id="divFlagIn">
+                <!-- Currency flags will only be shown if fiat currency is selected  -->
             </div>
             <select class="custom-select dynamic-select" id="inputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
@@ -58,8 +58,8 @@
     <div class="input-group">
         <input type="text" id="result" class="form-control" readonly>
         <div class="input-group-append">
-            <div class="input-group-append">
-                <span class="input-group-text" id="countryFlagOut"></span>
+            <div class="input-group-append" id="divFlagOut">
+                <!-- Currency flags will only be shown if fiat currency is selected  -->
             </div>
             <select class="custom-select dynamic-select" id="outputCurrency">
                 <!-- Options are being dynamically loaded from currencyOptions.js  -->
