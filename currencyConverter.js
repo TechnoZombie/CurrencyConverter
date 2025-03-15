@@ -5,22 +5,23 @@
  */
 
 // Global variables for application state
-let URL = 'https://open.er-api.com/v6/latest/';  // Base URL for exchange rate API
-let inputSelectedCurrency;                       // Selected input currency code
-let outputSelectedCurrency;                      // Selected output currency code
-let cryptoRate;                                  // Exchange rate for crypto conversions
-let API_URL;                                     // Complete API URL with selected currency
-let isCrypto = false;                            // Flag to indicate if crypto mode is active
+let URL = 'https://open.er-api.com/v6/latest/';   // Base URL for exchange rate API
+let inputSelectedCurrency;                              // Selected input currency code
+let outputSelectedCurrency;                             // Selected output currency code
+let cryptoRate;                                         // Exchange rate for crypto conversions
+let API_URL;                                            // Complete API URL with selected currency
+let isCrypto = false;                           // Flag to indicate if crypto mode is active
+
+// UI control elements
+const convertButton = $('#buttonConvert');
+const resetAmountButton = $('#buttonResetAmount');
+const resetAllButton = $('#buttonResetAll');
+const reverseButton = $('#reverseButton');
 
 $(document).ready(function () {
-    // UI control elements
-    const convertButton = $('#buttonConvert');
-    const resetAmountButton = $('#buttonResetAmount');
-    const resetAllButton = $('#buttonResetAll');
-    const reverseButton = $('#reverseButton');
 
-    // Initialize by preloading currency icons
-    preloadCurrencyIcons();
+    preloadCurrencyIcons();     // Preload currency icons
+    addFlagsOnlyOnFiat();       // Add divs for flags
 
     /**
      * Convert button click handler - initiates currency conversion
@@ -39,19 +40,6 @@ $(document).ready(function () {
     });
 
     /**
-     * Helper function to map country names to currency codes
-     * @param {string} country - The country name
-     * @param {string} currency - The current currency code
-     */
-    function setCurrencyCodeFromCountry(country, currency) {
-        if (currency === inputSelectedCurrency) {
-            inputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
-        } else if (currency === outputSelectedCurrency) {
-            outputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
-        }
-    };
-
-    /**
      * Reset amount fields only
      */
     resetAmountButton.click(function () {
@@ -66,6 +54,12 @@ $(document).ready(function () {
         $('#currencySwitch').prop('checked', false);
         $('#countriesSwitch').prop('checked', false);
 
+        // Reset global variables
+        inputSelectedCurrency = null;
+        outputSelectedCurrency = null;
+        API_URL = null;
+        isCrypto = false;
+
         // Regenerate currency options
         generateCurrencyOptions();
 
@@ -73,10 +67,9 @@ $(document).ready(function () {
         resetFields("val", ['#amount', '#result', '#rate', '#inputCurrency', '#outputCurrency'])
         resetFields("text", ['#rateCurrency', '#history', '#countryFlagIn', '#countryFlagOut'])
 
-        // Reset global variables
-        inputSelectedCurrency = null;
-        outputSelectedCurrency = null;
-        API_URL = null;
+        // Restore flag divs
+        addFlagsOnlyOnFiat();
+
     });
 
     /**
@@ -106,12 +99,30 @@ $(document).ready(function () {
         API_URL = `${URL}${inputSelectedCurrency}`;
     });
 
+
     /**
      * Toggle between crypto and fiat currency modes
      */
     $('#currencySwitch').change(function () {
         isCrypto = $(this).is(':checked');
+
+        if (isCrypto) {
+            $('#countriesSwitch').prop('checked', false);   // Moves code/country switch to code to prevent url build errors
+            generateCurrencyOptions();
+            removeFlagsSpan();
+        } else {
+            addFlagsOnlyOnFiat();
+        }
     });
+
+    /**
+     * Event handler for currency codes/country names switch
+     */
+    $('#countriesSwitch').change(function () {
+        $('#currencySwitch').prop('checked', false)
+        isCrypto = null;
+        addFlagsOnlyOnFiat()
+    })
 
     /**
      * Input currency dropdown change handler
@@ -157,6 +168,7 @@ $(document).ready(function () {
         setFlagIcon("countryFlagOut", outputSelectedCurrency);
         setCurrencyIcon();
     });
+
 
     /**
      * Sets the crypto exchange rate
@@ -225,15 +237,59 @@ $(document).ready(function () {
     async function fetchData() {
         try {
             let response = await $.ajax({
-                url: API_URL,
-                type: 'GET',
-                dataType: 'json',
-                async: true
+                url: API_URL, type: 'GET', dataType: 'json', async: true
             });
             return response;
         } catch (error) {
             console.error('Error fetching data:', error);
             throw error;
+        }
+    }
+
+    /**
+     * Helper function to map country names to currency codes
+     * @param {string} country - The country name
+     * @param {string} currency - The current currency code
+     */
+    function setCurrencyCodeFromCountry(country, currency) {
+        if (currency === inputSelectedCurrency) {
+            inputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
+        } else if (currency === outputSelectedCurrency) {
+            outputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
+        }
+    };
+
+    function addFlagsOnlyOnFiat() {
+        if (!isCrypto) {
+
+            // Check if there are flags already being shown and removes them if true
+            removeFlagsSpan();
+
+            // Input flag
+            const inputFlag = document.createElement("span"); // Create a new span element
+            inputFlag.className = "input-group-text"; // Add the class using className property
+            inputFlag.id = "countryFlagIn";      // Set the ID
+            document.querySelector("#divFlagIn").appendChild(inputFlag); // append to DOM
+
+            // Output flag
+            const outputFlag = document.createElement("span");
+            outputFlag.className = "input-group-text";
+            outputFlag.id = "countryFlagOut";
+            document.querySelector("#divFlagOut").appendChild(outputFlag);
+        }
+    }
+
+    function removeFlagsSpan() {
+
+        const preExistingInputFlag = document.getElementById("countryFlagIn");
+        const preExistingOutputFlat = document.getElementById("countryFlagOut");
+
+        if (preExistingInputFlag) {
+            preExistingInputFlag.remove();
+        }
+
+        if (preExistingOutputFlat) {
+            preExistingOutputFlat.remove();
         }
     }
 
