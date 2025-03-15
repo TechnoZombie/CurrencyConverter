@@ -1,6 +1,6 @@
 
-// Use .get() to retrieve values (currencyToCountryCodeMap.get("USD") → "US").
-const currencyToCountryCodeMap = new Map([
+// Use .get() to retrieve values (convertCurrencyCodeToCountryCodeMap.get("USD") → "US").
+const convertCurrencyCodeToCountryCodeMap = new Map([
     ["EUR", "EU"],
     ["USD", "US"],
     ["GBP", "GB"],
@@ -164,8 +164,7 @@ const currencyToCountryCodeMap = new Map([
     ["ZMW", "ZM"]
 ]);
 
-
-const countryCodeToNameMap = new Map([
+const convertCountryCodeToCountryNameMap = new Map([
     ["EU", "European Union"],
     ["US", "United States"],
     ["GB", "United Kingdom"],
@@ -326,7 +325,7 @@ const countryCodeToNameMap = new Map([
     ["ZM", "Zambia"]
 ]);
 
-const countryNameToCurrencyCodeMap = new Map([
+const convertCountryNameToCurrencyCodeMap = new Map([
     ["Euro Union", "EUR"],
     ["USA", "USD"],
     ["Utd Kingdom", "GBP"],
@@ -488,7 +487,7 @@ const countryNameToCurrencyCodeMap = new Map([
     ["Zambia", "ZMW"]
 ]);
 
-const currencyCodeToCountryNameMap = new Map([
+const convertCurrencyCodeToCountryNameMap = new Map([
     ["EUR", "Euro Union"],
     ["USD", "USA"],
     ["GBP", "Utd Kingdom"],

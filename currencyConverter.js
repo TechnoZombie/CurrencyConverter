@@ -82,8 +82,8 @@ $(document).ready(function () {
 
         if (isDisplayCountries()) {
             // Update country names in UI
-            $('#inputCurrency').val(currencyCodeToCountryNameMap.get(inputSelectedCurrency));
-            $('#outputCurrency').val(currencyCodeToCountryNameMap.get(outputSelectedCurrency));
+            $('#inputCurrency').val(convertCurrencyCodeToCountryNameMap.get(inputSelectedCurrency));
+            $('#outputCurrency').val(convertCurrencyCodeToCountryNameMap.get(outputSelectedCurrency));
         } else {
             // Update the currency codes in UI
             $('#inputCurrency').val(inputSelectedCurrency);
@@ -132,7 +132,9 @@ $(document).ready(function () {
         if (isDisplayCountries()) {
             // Get the selected country name and convert to currency code
             const inputSelectedCountry = $(this).val();
-            setCurrencyCodeFromCountry(inputSelectedCountry, inputSelectedCurrency);
+
+            inputSelectedCurrency = convertCountryNameToCurrencyCodeMap.get(inputSelectedCountry);
+
 
             // Build the API URL after ensuring currency code is set
             if (inputSelectedCurrency) {
@@ -157,8 +159,10 @@ $(document).ready(function () {
     $("#outputCurrency").change(function () {
         if (isDisplayCountries()) {
             // Get the selected country name and convert to currency code
-            const outputSelectedCountry = $(this).val();
-            setCurrencyCodeFromCountry(outputSelectedCountry, outputSelectedCurrency);
+            const outputSelectedCountry = $(this).val(); // utd kingdom
+
+            outputSelectedCurrency = convertCountryNameToCurrencyCodeMap.get(outputSelectedCountry);
+
         } else {
             // Directly set currency code from dropdown value
             outputSelectedCurrency = $(this).val();
@@ -246,18 +250,6 @@ $(document).ready(function () {
         }
     }
 
-    /**
-     * Helper function to map country names to currency codes
-     * @param {string} country - The country name
-     * @param {string} currency - The current currency code
-     */
-    function setCurrencyCodeFromCountry(country, currency) {
-        if (currency === inputSelectedCurrency) {
-            inputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
-        } else if (currency === outputSelectedCurrency) {
-            outputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
-        }
-    };
 
     function addFlagsOnlyOnFiat() {
         if (!isCrypto) {

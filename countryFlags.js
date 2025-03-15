@@ -4,13 +4,13 @@ function setFlagIcon(elementId, currency) {
 
     // CountryFlag API does not have EU flag available, so it needs to be local.
     if (currency === "EUR") {
-        const countryName = countryCodeToNameMap.get("EU");
+        const countryName = convertCountryCodeToCountryNameMap.get("EU");
         flag.src = 'resources/EU.png';
         flag.alt = flag.title = countryName;
 
     } else {
-        const countryCode = currencyToCountryCodeMap.get(currency);
-        const countryName = countryCodeToNameMap.get(countryCode);
+        const countryCode = convertCurrencyCodeToCountryCodeMap.get(currency);
+        const countryName = convertCountryCodeToCountryNameMap.get(countryCode);
         flag.src = `https://flagsapi.com/${countryCode}/shiny/32.png`;
         flag.alt = flag.title = countryName;
     }
