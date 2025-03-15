@@ -33,6 +33,7 @@ const convertCurrencyCodeToCountryCodeMap = new Map([
     ["CDF", "CD"],
     ["CHF", "CH"],
     ["CLP", "CL"],
+    ["CFA", "CM"],
     ["CNY", "CN"],
     ["COP", "CO"],
     ["CRC", "CR"],
@@ -648,3 +649,5 @@ const convertCurrencyCodeToCountryNameMap = new Map([
     ["ZAR", "South Africa"],
     ["ZMW", "Zambia"]
 ]);
+
+

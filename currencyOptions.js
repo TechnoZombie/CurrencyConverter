@@ -51,7 +51,7 @@ const fiatCurrencies = [
 ];
 
 const cryptoCurrencies = [
-    "EUR","USD","BTC", "ETH", "1INCH", "AAVE", "AKITA", "AKRO", "ALGO", "ALPHA", "AMP", "ANKR", "ANT", "APE", "APT", "ARB", "ARPA",
+    "EUR", "USD", "BTC", "ETH", "1INCH", "AAVE", "AKITA", "AKRO", "ALGO", "ALPHA", "AMP", "ANKR", "ANT", "APE", "APT", "ARB", "ARPA",
     "ATOM", "AUDIUS", "AVAX", "BABYDOGE", "BADGER", "BAL", "BAND", "BAT", "BCH", "BEL", "BLOX", "BNB", "BNX", "BNT", "BOND", "BUSD",
     "BTS", "COTI", "CHR", "COVER", "CREAM", "CVC", "DAI", "DAO", "DENT", "DEGO", "DFI", "DIA", "DODO", "DOGE", "DOCK",
     "DOT", "DYDX", "ELON", "ENJ", "ERD", "ETC", "FIL", "FLOW", "FOR", "FRONT", "FUN", "GALA", "GHST", "GNO", "GRT",
@@ -65,20 +65,31 @@ const cryptoCurrencies = [
 ];
 
 const countryNames = [
-    "Euro Union", "USA", "Utd Kingdom", "UA Emirates", "Afghanistan", "Albania", "Armenia",
-    "Curaçao", "Angola", "Argentina", "Australia", "Aruba", "Azerbaijan", "Bos Herzegov", "Barbados", "Bangladesh",
-    "Bulgaria", "Bahrain", "Burundi", "Bermuda", "Brunei", "Bolivia", "Brazil", "Bahamas", "Bhutan", "Botswana",
-    "Belarus", "Belize", "Canada", "Congo", "Switzerland", "Chile", "China", "Colombia", "Costa Rica", "Cuba", "Cabo Verde",
-    "Czech Rep", "Djibouti", "Denmark", "Dom Republic", "Algeria", "Egypt", "Eritrea", "Ethiopia", "Fiji",
-    "Falkland Isl", "Faroe Isl", "Georgia", "Guernsey", "Ghana", "Gibraltar", "Gambia", "Guinea", "Guatemala", "Guyana",
-    "Hong Kong", "Honduras", "Croatia", "Haiti", "Hungary", "Indonesia", "Israel", "Isl of Man", "India", "Iraq", "Iran", "Iceland",
-    "Jersey", "Jamaica", "Jordan", "Japan", "Kenya", "Kyrgyzstan", "Cambodia", "Kiribati", "Comoros", "South Korea", "Kuwait",
-    "Cayman Isl", "Kazakhstan", "Laos", "Lebanon", "Sri Lanka", "Liberia", "Lesotho", "Libya", "Morocco", "Moldova",
-    "Madagascar", "N.Macedonia", "Myanmar", "Mongolia", "Macao", "Mauritania", "Mauritius", "Maldives", "Malawi", "Mexico",
-    "Malaysia", "Mozambique", "Namibia", "Nigeria", "Nicaragua", "Norway", "Nepal", "New Zealand", "Oman", "Panama", "Peru",
-    "Papua N Guinea", "Philippines", "Pakistan", "Poland", "Paraguay", "Qatar", "Romania", "Serbia", "Russia", "Rwanda",
-    "Saudi Arabia", "Solomon Isl.", "Seychelles", "Sudan", "Sweden", "Singapore", "Saint Helena", "Sierra Leone", "Somalia",
-    "Suriname", "South Sudan", "S.Tome Principe", "Syria", "Eswatini", "Thailand", "Tajikistan", "Turkmenistan", "Tunisia",
-    "Tonga", "Turkey", "Trin Tobago", "Tuvalu", "Taiwan", "Tanzania", "Ukraine", "Uganda", "Uruguay", "Uzbekistan",
-    "Venezuela", "Vietnam", "Vanuatu", "Samoa", "C.African Rep.", "French Poly", "Yemen", "South Africa", "Zambia"
+    "Euro Union", "USA", "Utd Kingdom",
+    "Afghanistan", "Albania", "Algeria", "Angola", "Argentina", "Armenia", "Aruba", "Australia", "Azerbaijan",
+    "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belize", "Bermuda", "Bhutan", "Bolivia", "Bos Herzegov", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burundi",
+    "C.African Rep.", "Cabo Verde", "Cambodia", "Canada", "Cayman Isl", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Curaçao", "Czech Rep",
+    "Djibouti", "Denmark", "Dom Republic",
+    "Egypt", "Eritrea", "Eswatini", "Ethiopia",
+    "Falkland Isl", "Faroe Isl", "Fiji", "French Poly",
+    "Gambia", "Georgia", "Ghana", "Gibraltar", "Guatemala", "Guernsey", "Guinea", "Guyana",
+    "Haiti", "Honduras", "Hong Kong", "Hungary",
+    "Iceland", "India", "Indonesia", "Iran", "Iraq", "Isl of Man", "Israel",
+    "Jamaica", "Japan", "Jersey", "Jordan",
+    "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan",
+    "Laos", "Lebanon", "Lesotho", "Liberia", "Libya",
+    "Madagascar", "Macao", "Malawi", "Malaysia", "Maldives", "Mauritania", "Mauritius", "Mexico", "Moldova", "Mongolia", "Morocco", "Mozambique", "Myanmar",
+    "N.Macedonia", "Namibia", "Nepal", "New Zealand", "Nicaragua", "Nigeria", "Norway",
+    "Oman",
+    "Pakistan", "Panama", "Papua N Guinea", "Paraguay", "Peru", "Philippines", "Poland",
+    "Qatar",
+    "Romania", "Russia", "Rwanda",
+    "S.Tome Principe", "Saint Helena", "Saudi Arabia", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Solomon Isl.", "Somalia", "South Africa", "South Korea", "South Sudan", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria",
+    "Tajikistan", "Tanzania", "Thailand", "Tonga", "Trin Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu",
+    "Uganda", "Ukraine", "Uruguay", "Uzbekistan",
+    "Vanuatu", "Venezuela", "Vietnam",
+    "Yemen",
+    "Zambia"
 ];
+
+
