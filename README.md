@@ -10,7 +10,7 @@ This project is a simple currency converter built using HTML, CSS, Bootstrap, jQ
 - Shows historical results.
 - Quickly switch "from" and "to" currencies;
 - Icons for the currencies are retrieved from the API on currencyIcons.js. If no icon is available, currency code will be shown.
-- Country flags are shown next to the currency code when selected. Flags provided by CoutryFlags api.
+- Country flags are shown next to the currency code or country when fiat is selected. Flags provided by CountryFlags api.
 
 **LINK:** [https://technozombie.github.io/CurrencyConverter](https://technozombie.github.io/CurrencyConverter)
 
@@ -28,12 +28,14 @@ This project is a simple currency converter built using HTML, CSS, Bootstrap, jQ
 
 The project consists of the following files:
 
-- index.html: The main HTML file containing the structure of the currency converter.
-- currencyConverter.css: The CSS file for styling the currency converter.
-- currencyConverter.js: The JavaScript file handling user input, API calls, and data processing.
-- currencyOptions.js: The JavaScript file for dynamically loading currency options.
-- cryptoExchangeCall.js: A JavaScript file that handles logic for the crypto API calls.
-- countryFlags.js: JavaScript file that holds all the logic for flag selection as well as mapping from currency code to country code.
+- index.html: Main HTML file containing the structure of the currency converter.
+- currencyConverter.css: CSS file for styling the currency converter.
+- currencyConverter.js: JavaScript file handling user input, API calls, and data processing.
+- currencyOptions.js: JavaScript file for dynamically loading currency options.
+- cryptoExchangeCall.js: JavaScript file that handles logic for the crypto API calls.
+- countryFlags.js: JavaScript file that holds all the logic for flag selection.
+- mappings.js: JavaScript file that containing mappings for country codes, county names and currency codes.
+- currencyIcons.js: JavaScript file that handles preloading of currency icons.
 
 **Technologies Used**
 - JavaScript
