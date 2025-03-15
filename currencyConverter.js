@@ -5,12 +5,12 @@
  */
 
 // Global variables for application state
-let URL = 'https://open.er-api.com/v6/latest/';  // Base URL for exchange rate API
-let inputSelectedCurrency;                       // Selected input currency code
-let outputSelectedCurrency;                      // Selected output currency code
-let cryptoRate;                                  // Exchange rate for crypto conversions
-let API_URL;                                     // Complete API URL with selected currency
-let isCrypto = false;                            // Flag to indicate if crypto mode is active
+let URL = 'https://open.er-api.com/v6/latest/';   // Base URL for exchange rate API
+let inputSelectedCurrency;                              // Selected input currency code
+let outputSelectedCurrency;                             // Selected output currency code
+let cryptoRate;                                         // Exchange rate for crypto conversions
+let API_URL;                                            // Complete API URL with selected currency
+let isCrypto = false;                           // Flag to indicate if crypto mode is active
 
 // UI control elements
 const convertButton = $('#buttonConvert');
@@ -20,10 +20,8 @@ const reverseButton = $('#reverseButton');
 
 $(document).ready(function () {
 
-    // Preload currency icons
-    preloadCurrencyIcons();
-    // Add divs for flags
-    addFlagsOnlyOnFiat();
+    preloadCurrencyIcons();     // Preload currency icons
+    addFlagsOnlyOnFiat();       // Add divs for flags
 
     /**
      * Convert button click handler - initiates currency conversion
@@ -40,19 +38,6 @@ $(document).ready(function () {
             standaloneCalculator(amountToConvert, cryptoRate);
         }
     });
-
-    /**
-     * Helper function to map country names to currency codes
-     * @param {string} country - The country name
-     * @param {string} currency - The current currency code
-     */
-    function setCurrencyCodeFromCountry(country, currency) {
-        if (currency === inputSelectedCurrency) {
-            inputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
-        } else if (currency === outputSelectedCurrency) {
-            outputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
-        }
-    };
 
     /**
      * Reset amount fields only
@@ -113,6 +98,7 @@ $(document).ready(function () {
         // Build the API URL with new input currency
         API_URL = `${URL}${inputSelectedCurrency}`;
     });
+
 
     /**
      * Toggle between crypto and fiat currency modes
@@ -182,6 +168,7 @@ $(document).ready(function () {
         setFlagIcon("countryFlagOut", outputSelectedCurrency);
         setCurrencyIcon();
     });
+
 
     /**
      * Sets the crypto exchange rate
@@ -258,6 +245,19 @@ $(document).ready(function () {
             throw error;
         }
     }
+
+    /**
+     * Helper function to map country names to currency codes
+     * @param {string} country - The country name
+     * @param {string} currency - The current currency code
+     */
+    function setCurrencyCodeFromCountry(country, currency) {
+        if (currency === inputSelectedCurrency) {
+            inputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
+        } else if (currency === outputSelectedCurrency) {
+            outputSelectedCurrency = countryNameToCurrencyCodeMap.get(country);
+        }
+    };
 
     function addFlagsOnlyOnFiat() {
         if (!isCrypto) {
