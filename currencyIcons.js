@@ -19,5 +19,7 @@ function getAssetUrl(asset_id) {
 
     if (asset) {
         return asset.url;
+    } else {
+        return null
     }
 }

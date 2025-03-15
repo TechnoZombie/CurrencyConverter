@@ -324,8 +324,17 @@ $(document).ready(function () {
     function setCurrencyIcon() {
         $("#rateCurrency").empty();
 
+        const iconUrl = getAssetUrl(outputSelectedCurrency);
+
+        // If no valid URL was returned, show the currency code
+        if (!iconUrl) {
+            $("#rateCurrency").text(outputSelectedCurrency);
+            console.error("Error: Currency icon unavailable for " + outputSelectedCurrency);
+            return;
+        }
+
         const currencyIcon = new Image();
-        currencyIcon.src = getAssetUrl(outputSelectedCurrency);
+        currencyIcon.src = iconUrl;
 
         currencyIcon.onload = function () {
             $("#rateCurrency").append($(currencyIcon).addClass("loaded"));
